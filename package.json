@@ -12,6 +12,7 @@
     "flatpickr": "^4.5.1",
     "nouislider": "^11.1.0",
     "register-service-worker": "^1.5.2",
+    "vee-validate": "^3.3.5",
     "vue": "^2.6.6",
     "vue-flatpickr-component": "^8.1.1",
     "vue-lazyload": "^1.2.6",
@@ -22,7 +23,7 @@
     "@vue/cli-plugin-babel": "^3.4.0",
     "@vue/cli-plugin-eslint": "^3.4.0",
     "@vue/cli-plugin-pwa": "^3.4.0",
-    "@vue/cli-service": "^4.4.4",
+    "@vue/cli-service": "^3.4.0",
     "node-sass": "^4.11.0",
     "sass-loader": "^7.1.0",
     "vue-template-compiler": "^2.6.6"
