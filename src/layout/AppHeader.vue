@@ -1,8 +1,8 @@
 <template>
     <header class="header-global">
-        <base-nav class="navbar-main" transparent type="primary" effect="dark" expand>
+        <base-nav class="navbar-main" transparent type="" effect="light" expand>
             <router-link slot="brand" class="navbar-brand mr-lg-5" to="/">
-                <img src="img/brand/white.png" alt="logo">
+                <img src="img/brand/catlogo.png" >
             </router-link>
 
             <div class="row" slot="content-header" slot-scope="{closeMenu}">
@@ -17,32 +17,32 @@
             </div>
 
             <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
-                <base-dropdown class="nav-item" menu-classes="dropdown-menu-xl">
+                <base-dropdown class="nav-item" menu-classes="dropdown-menu-xl" v-show="showbreedlist">
                     <a slot="title" href="#" class="nav-link" data-toggle="dropdown" role="button">
                         <i class="ni ni-ui-04 d-lg-none"></i>
-                        <span class="nav-link-inner--text">Components</span>
+                        <span class="nav-link-inner--text">Breed</span>
                     </a>
                     <div class="dropdown-menu-inner">
-                        <a href="https://demos.creative-tim.com/vue-argon-design-system/documentation/"
+                        <a href="#"
                            class="media d-flex align-items-center">
-                            <div class="icon icon-shape bg-gradient-primary rounded-circle text-white">
-                                <i class="ni ni-spaceship"></i>
+                            <div >   
+                                <img v-lazy="'img/theme/shorthair.jpg'" alt="Raised circle image"
+                                class="img-fluid rounded-circle shadow-lg" style="width: 50px;">                             
                             </div>
                             <div class="media-body ml-3">
-                                <h6 class="heading text-primary mb-md-1">Getting started</h6>
-                                <p class="description d-none d-md-inline-block mb-0">Get started with Bootstrap, the
-                                    world's most popular framework for building responsive sites.</p>
+                                <h6 class="heading text-primary mb-md-1">Short hair</h6>
+                                <p class="description d-none d-md-inline-block mb-0">Short hair list</p>
                             </div>
                         </a>
-                        <a href="https://demos.creative-tim.com/vue-argon-design-system/documentation/"
+                        <a href="#"
                            class="media d-flex align-items-center">
-                            <div class="icon icon-shape bg-gradient-warning rounded-circle text-white">
-                                <i class="ni ni-ui-04"></i>
+                            <div >
+                                <img v-lazy="'img/theme/longhair.jpg'" alt="Raised circle image"
+                                class="img-fluid rounded-circle shadow-lg" style="width: 50px;"> 
                             </div>
                             <div class="media-body ml-3">
-                                <h5 class="heading text-warning mb-md-1">Components</h5>
-                                <p class="description d-none d-md-inline-block mb-0">Learn how to use Argon
-                                    compiling Scss, change brand colors and more.</p>
+                                <h5 class="heading text-warning mb-md-1">Long hair</h5>
+                                <p class="description d-none d-md-inline-block mb-0">Long hair list</p>
                             </div>
                         </a>
                     </div>
@@ -50,52 +50,44 @@
                 <base-dropdown tag="li" class="nav-item">
                     <a slot="title" href="#" class="nav-link" data-toggle="dropdown" role="button">
                         <i class="ni ni-collection d-lg-none"></i>
-                        <span class="nav-link-inner--text">Examples</span>
+                        <span class="nav-link-inner--text">Account</span>
                     </a>
-                    <router-link to="/landing" class="dropdown-item">Landing</router-link>
                     <router-link to="/profile" class="dropdown-item">Profile</router-link>
                     <router-link to="/login" class="dropdown-item">Login</router-link>
                     <router-link to="/register" class="dropdown-item">Register</router-link>
                 </base-dropdown>
             </ul>
             <ul class="navbar-nav align-items-lg-center ml-lg-auto">
+                <li class="nav-item" v-show="showsearchbar">
+                     <base-input 
+                                    placeholder="Search"
+                                    addon-left-icon="ni ni-zoom-split-in">
+                    </base-input>
+                </li> 
                 <li class="nav-item">
-                    <a class="nav-link nav-link-icon" href="https://www.facebook.com/creativetim" target="_blank" rel="noopener"
+                    <a class="nav-link nav-link-icon" href="#" target="_blank" rel="noopener"
                        data-toggle="tooltip" title="Like us on Facebook">
                         <i class="fa fa-facebook-square"></i>
                         <span class="nav-link-inner--text d-lg-none">Facebook</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link nav-link-icon" href="https://www.instagram.com/creativetimofficial"
+                    <a class="nav-link nav-link-icon" href="#"
                        target="_blank" rel="noopener" data-toggle="tooltip" title="Follow us on Instagram">
                         <i class="fa fa-instagram"></i>
                         <span class="nav-link-inner--text d-lg-none">Instagram</span>
                     </a>
                 </li>
+             
                 <li class="nav-item">
-                    <a class="nav-link nav-link-icon" href="https://twitter.com/creativetim" target="_blank" rel="noopener"
-                       data-toggle="tooltip" title="Follow us on Twitter">
-                        <i class="fa fa-twitter-square"></i>
-                        <span class="nav-link-inner--text d-lg-none">Twitter</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link nav-link-icon" href="https://github.com/creativetimofficial/vue-argon-design-system"
+                    <a class="nav-link nav-link-icon" href="#"
                        target="_blank" rel="noopener" data-toggle="tooltip" title="Star us on Github">
                         <i class="fa fa-github"></i>
                         <span class="nav-link-inner--text d-lg-none">Github</span>
                     </a>
                 </li>
-                <li class="nav-item d-none d-lg-block ml-lg-4">
-                    <a href="https://www.creative-tim.com/product/vue-argon-design-system" target="_blank" rel="noopener"
-                       class="btn btn-neutral btn-icon">
-                <span class="btn-inner--icon">
-                  <i class="fa fa-cloud-download mr-2"></i>
-                </span>
-                        <span class="nav-link-inner--text">Download</span>
-                    </a>
-                </li>
+                   
+                
             </ul>
         </base-nav>
     </header>
@@ -104,13 +96,40 @@
 import BaseNav from "@/components/BaseNav";
 import BaseDropdown from "@/components/BaseDropdown";
 import CloseButton from "@/components/CloseButton";
+import Images from "../views/components/JavascriptComponents/Images";
 
 export default {
   components: {
     BaseNav,
     CloseButton,
-    BaseDropdown
+    BaseDropdown,
+    Images
+  },
+  data() {
+      return {
+        showbreedlist: true,
+        showsearchbar: true
+      }
+  },
+  watch: {
+    '$route' () {
+      if (this.$route.path === '/register') {
+        this.showbreedlist = false,
+        this.showsearchbar = false
+      }
+      else if(this.$route.path === '/login'){
+        this.showbreedlist = false,
+        this.showsearchbar = false
+      }else if(this.$route.path === '/profile'){
+        this.showbreedlist = false,
+        this.showsearchbar = false
+      }else if(this.$route.path === '/'){
+        this.showbreedlist = true,
+        this.showsearchbar = true
+      }   
+    }
   }
+
 };
 </script>
 <style>
