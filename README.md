@@ -22,8 +22,28 @@
 
 <h2 id="table-of-contents">Table of Contents</h2>
 
+<ul>
+  <li><a href="#demo">Demo</a></li>
+  <li><a href="#quick-start">Quick Start</a></li>
+  <li><a href="#documentation">Documentation</a></li>
+  <li><a href="#file-structure">File Structure</a></li>
+  <li><a href="#browser-support">Browser Support</a></li>
+  <li><a href="#resources">Resources</a></li>
+  <li><a href="#reporting-issues">Reporting Issues</a></li>
+  <li><a href="#technical-support-or-questions">Technical Support or Questions</a></li>
+  <li><a href="#licensing">Licensing</a></li>
+  <li><a href="#useful-links">Useful Links</a></li>
+</ul>
 
+<h2 id="demo">Demo</h2>
 
+<ul>
+  <li><a href="https://demos.creative-tim.com/vue-argon-design-system">Index Page</a></li>
+  <li><a href="https://demos.creative-tim.com/vue-argon-design-system/#/landing">Landing page</a></li>
+  <li><a href="https://demos.creative-tim.com/vue-argon-design-system/#/profile">Profile Page</a></li>
+  <li><a href="https://demos.creative-tim.com/vue-argon-design-system/#/login">Login Page</a></li>
+  <li><a href="https://demos.creative-tim.com/vue-argon-design-system/#/register">Register Page</a></li>
+</ul>
 
 <p><a href="https://demos.creative-tim.com/argon-design-system">View More</a></p>
 
@@ -135,6 +155,9 @@
   <li>Issues: <a href="https://github.com/creativetimofficial/vue-argon-design-system/issues">Github Issues Page</a></li>
 </ul>
 
+<h2 id="reporting-issues">Reporting Issues</h2>
+
+<p>We use GitHub Issues as the official bug tracker for the Vue Argon Design System. Here are some advices for our users that want to report an issue:</p>
 
 <ol>
   <li>Make sure that you are using the latest version of the Vue Argon Design System. Check the CHANGELOG from your copy on our <a href="https://www.creative-tim.com">website</a>.</li>
@@ -159,7 +182,12 @@
 
 <h2 id="useful-links">Useful Links</h2>
 
-
+<ul>
+  <li><a href="https://www.creative-tim.com/bootstrap-themes">More products</a> from Creative Tim</li>
+  <li><a href="https://www.youtube.com/channel/UCVyTG4sCw-rOvB9oHkzZD1w">Tutorials</a></li>
+  <li><a href="https://www.creative-tim.com/bootstrap-themes/free">Freebies</a> from Creative Tim</li>
+  <li><a href="https://www.creative-tim.com/affiliates/new">Affiliate Program</a> (earn money)</li>
+</ul>
 
 <h2 id="social-media">Social Media</h2>
 
