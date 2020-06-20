@@ -23,7 +23,7 @@
                         <span class="nav-link-inner--text">Breed</span>
                     </a>
                     <div class="dropdown-menu-inner">
-                        <a href="#"
+                        <a href="https://demos.creative-tim.com/vue-argon-design-system/documentation/"
                            class="media d-flex align-items-center">
                             <div >   
                                 <img v-lazy="'img/theme/shorthair.jpg'" alt="Raised circle image"
@@ -34,7 +34,7 @@
                                 <p class="description d-none d-md-inline-block mb-0">Short hair list</p>
                             </div>
                         </a>
-                        <a href="#"
+                        <a href="https://demos.creative-tim.com/vue-argon-design-system/documentation/"
                            class="media d-flex align-items-center">
                             <div >
                                 <img v-lazy="'img/theme/longhair.jpg'" alt="Raised circle image"
@@ -59,20 +59,19 @@
             </ul>
             <ul class="navbar-nav align-items-lg-center ml-lg-auto">
                 <li class="nav-item" v-show="showsearchbar">
-                     <base-input 
-                                    placeholder="Search"
-                                    addon-left-icon="ni ni-zoom-split-in">
+                    <base-input placeholder="Search" v-show="showsearchbar"
+                                addon-left-icon="ni ni-zoom-split-in">
                     </base-input>
                 </li> 
                 <li class="nav-item">
-                    <a class="nav-link nav-link-icon" href="#" target="_blank" rel="noopener"
+                    <a class="nav-link nav-link-icon" href="https://www.facebook.com/creativetim" target="_blank" rel="noopener"
                        data-toggle="tooltip" title="Like us on Facebook">
                         <i class="fa fa-facebook-square"></i>
                         <span class="nav-link-inner--text d-lg-none">Facebook</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link nav-link-icon" href="#"
+                    <a class="nav-link nav-link-icon" href="https://www.instagram.com/creativetimofficial"
                        target="_blank" rel="noopener" data-toggle="tooltip" title="Follow us on Instagram">
                         <i class="fa fa-instagram"></i>
                         <span class="nav-link-inner--text d-lg-none">Instagram</span>
