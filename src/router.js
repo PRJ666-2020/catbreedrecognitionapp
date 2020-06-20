@@ -40,7 +40,7 @@ export default new Router({
       components: {
         header: AppHeader,
         default: Login,
-        //footer: AppFooter
+        footer: AppFooter
       }
     },
     {
@@ -49,7 +49,7 @@ export default new Router({
       components: {
         header: AppHeader,
         default: Register,
-        //footer: AppFooter
+        footer: AppFooter
       }
     },
     {

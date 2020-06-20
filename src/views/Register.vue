@@ -18,64 +18,92 @@
                           body-classes="px-lg-5 py-lg-5"
                           class="border-0">
                         <template>
-                            <div class="text-muted text-center mb-3">
-                                <small>Sign in with</small>
-                            </div>
-                            <div class="btn-wrapper text-center">
-                                <base-button type="neutral">
-                                    <img slot="icon" src="img/icons/common/github.svg">
-                                    Github
-                                </base-button>
+              <ValidationObserver v-slot="{ handleSubmit }">
+                <form @submit.prevent="handleSubmit(onSubmit)">
+                  <div class="form-group">
+                    <label>Username</label>
+                    <ValidationProvider name="Username" rules="minmax:8,25|required" v-slot="v">
+                      <input
+                        v-model="username"
+                        type="text"
+                        placeholder="Username"
+                        class="form-control"
+                      />
+                      <small class="form-text text-muted">{{v.errors[0]}}</small>
+                    </ValidationProvider>
+                  </div>
+                  <div class="form-group">
+                    <label>Email address</label>
+                    <ValidationProvider name="Email" rules="minmax:8,25|required" v-slot="v">
+                      <input v-model="email" type="email" placeholder="Email" class="form-control" />
+                      <small class="form-text text-muted">{{v.errors[0]}}</small>
+                    </ValidationProvider>
+                  </div>
+                  <div class="form-group">
+                    <label>Password</label>
+                    <ValidationProvider
+                      name="Password"
+                      rules="required|password:@Confirming"
+                      v-slot="v"
+                    >
+                      <input
+                        type="password"
+                        v-model="password"
+                        placeholder="Password"
+                        class="form-control"
+                      />
+                      <small class="form-text text-muted">{{v.errors[0]}}</small>
+                    </ValidationProvider>
+                  </div>
 
-                                <base-button type="neutral">
-                                    <img slot="icon" src="img/icons/common/google.svg">
-                                    Google
-                                </base-button>
-                            </div>
-                        </template>
-                        <template>
-                            <div class="text-center text-muted mb-4">
-                                <small>Or sign up with credentials</small>
-                            </div>
-                            <form role="form">
-                                <base-input alternative
-                                            class="mb-3"
-                                            placeholder="Name"
-                                            addon-left-icon="ni ni-hat-3">
-                                </base-input>
-                                <base-input alternative
-                                            class="mb-3"
-                                            placeholder="Email"
-                                            addon-left-icon="ni ni-email-83">
-                                </base-input>
-                                <base-input alternative
-                                            type="password"
-                                            placeholder="Password"
-                                            addon-left-icon="ni ni-lock-circle-open">
-                                </base-input>
-                                <div class="text-muted font-italic">
-                                    <small>password strength:
-                                        <span class="text-success font-weight-700">strong</span>
-                                    </small>
-                                </div>
-                                <base-checkbox>
-                                    <span>I agree with the
-                                        <a href="#">Privacy Policy</a>
-                                    </span>
-                                </base-checkbox>
-                                <div class="text-center">
-                                    <base-button type="primary" class="my-4">Create account</base-button>
-                                </div>
-                            </form>
-                        </template>
+                  <div class="form-group">
+                    <label>Confirm password</label>
+                    <ValidationProvider
+                      name="Confirming"
+                      vid="Confirming"
+                      rules="required"
+                      v-slot="v"
+                    >
+                      <input
+                        type="password"
+                        v-model="confirmation"
+                        placeholder="Confirm password"
+                        class="form-control"
+                      />
+                      <small class="form-text text-muted">{{v.errors[0]}}</small>
+                    </ValidationProvider>
+                  </div>
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+              </ValidationObserver>
+            </template>
                     </card>
                 </div>
             </div>
+            <br>
         </div>
     </section>
 </template>
 <script>
-export default {};
+import { minmax, required, confirmPassword } from "../validation";
+import { ValidationProvider, ValidationObserver } from "vee-validate";
+export default {
+  data: () => ({
+    username: "",
+    email: "",
+    password: "",
+    confirmation: ""
+  }),
+  components: {
+    ValidationProvider,
+    ValidationObserver
+  },
+  methods: {
+    onSubmit() {
+      alert("Form submitted!");
+    }
+  }
+};
 </script>
 <style>
 </style>
