@@ -81,6 +81,22 @@
               </ValidationObserver>
             </template>
           </card>
+          <div class="row mt-3">
+            <div class="col-6">
+              <a href="#" class="text-light">
+                <small> 
+                  <router-link to="/login">Login</router-link>
+                </small>
+              </a>
+            </div>
+            <div class="col-6 text-right">
+              <a href="#" class="text-light">
+                <small>
+                  <router-link to="/register">Create new account</router-link>
+                </small>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
       <br />

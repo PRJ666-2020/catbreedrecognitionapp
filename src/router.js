@@ -7,6 +7,7 @@ import Landing from "./views/Landing.vue";
 import Login from "./views/Login.vue";
 import Register from "./views/Register.vue";
 import Profile from "./views/Profile.vue";
+import Resetpassword from "./views/Resetpassword.vue";
 
 Vue.use(Router);
 
@@ -58,6 +59,15 @@ export default new Router({
       components: {
         header: AppHeader,
         default: Profile,
+        footer: AppFooter
+      }
+    },
+    {
+      path: "/resetpassword",
+      name: "resetpassword",
+      components: {
+        header: AppHeader,
+        default: Resetpassword,
         footer: AppFooter
       }
     }
