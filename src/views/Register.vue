@@ -32,14 +32,14 @@
                         placeholder="Username"
                         class="form-control"
                       />
-                      <small class="form-text text-muted">{{v.errors[0]}}</small>
+                      <small class="form-text text-danger">{{v.errors[0]}}</small>
                     </ValidationProvider>
                   </div>
                   <div class="form-group">
                     <label>Email address</label>
                     <ValidationProvider name="Email" rules="minmax:8,25|required" v-slot="v">
                       <input v-model="email" type="email" placeholder="Email" class="form-control" />
-                      <small class="form-text text-muted">{{v.errors[0]}}</small>
+                      <small class="form-text text-danger">{{v.errors[0]}}</small>
                     </ValidationProvider>
                   </div>
                   <div class="form-group">
@@ -55,7 +55,7 @@
                         placeholder="Password"
                         class="form-control"
                       />
-                      <small class="form-text text-muted">{{v.errors[0]}}</small>
+                      <small class="form-text text-danger">{{v.errors[0]}}</small>
                     </ValidationProvider>
                   </div>
 
@@ -73,7 +73,7 @@
                         placeholder="Confirm password"
                         class="form-control"
                       />
-                      <small class="form-text text-muted">{{v.errors[0]}}</small>
+                      <small class="form-text text-danger">{{v.errors[0]}}</small>
                     </ValidationProvider>
                   </div>
                   <button type="submit" class="btn btn-primary">Submit</button>
