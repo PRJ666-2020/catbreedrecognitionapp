@@ -1,7 +1,6 @@
 <template>
     <header class="header-global">
-
-        <base-nav class="navbar-main"  type="primary" effect="light" round expand>
+        <base-nav class="navbar-main" transparent type="" effect="light" expand>
             <router-link slot="brand" class="navbar-brand mr-lg-5" to="/">
                 <img src="img/brand/white.png">
             </router-link>
@@ -108,20 +107,13 @@
 <script>
 import BaseNav from "@/components/BaseNav";
 import CloseButton from "@/components/CloseButton";
-import BaseDropdown from "@/components/BaseDropdown";
-
 
 export default {
   components: {
     BaseNav,
-    CloseButton,
-    BaseDropdown
+    CloseButton
   }
 };
 </script>
-
 <style>
-
-</style>>
-
-
+</style>
