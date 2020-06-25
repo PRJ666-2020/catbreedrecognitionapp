@@ -17,7 +17,12 @@ export default new Router({
   routes: [
     {
       path: "/",
-      redirect: 'login',
+      name: "login",
+      components: {
+        header: AppHeader,
+        default: Login,
+        footer: AppFooter
+      }
     },
     {
       path: "/login",
