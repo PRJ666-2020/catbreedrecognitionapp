@@ -94,14 +94,14 @@ export default {
     components: {
 
     },
-    watch: {
-     //if user logged in dont show login or register
+    // watch: {
+    //  //if user logged in dont show login or register
 
           
-    },
+    // },
     methods: {
         onSubmit(){
-            alert("login information submitted!");
+            // alert("login information submitted!");
             this.$http.post('https://mighty-wave-39527.herokuapp.com/api/selectEmail', {
                 email: this.email,
                 password: this.password
@@ -111,8 +111,8 @@ export default {
                 this.$router.push({path: '/profile' });
             })
             .catch(err=>{
-                isError=true;
-                alert("username or password not correct");
+                this.isError=true;
+                // alert("username or password not correct");
                 console.log('err', err);
             })
 
