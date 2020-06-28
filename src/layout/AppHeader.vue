@@ -125,8 +125,8 @@ export default {
         this.showbreedlist = false,
         this.showsearchbar = false
       }else if(this.$route.path === '/'){
-        this.showbreedlist = true,
-        this.showsearchbar = true
+        this.showbreedlist = false,
+        this.showsearchbar = false
       }   
     }
   }
