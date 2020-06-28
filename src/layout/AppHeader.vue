@@ -111,6 +111,8 @@ export default {
       }
   },
   watch: {
+     //if user logged in dont show login or register
+
     '$route' () {
       if (this.$route.path === '/register') {
         this.showbreedlist = false,
