@@ -28,7 +28,7 @@
                 <base-button
                   tag="a"
                   class="mb-3 mb-sm-0"
-                  type="white" 
+                  type="info" 
                 >Recognize</base-button>
               </div>
             </div>
