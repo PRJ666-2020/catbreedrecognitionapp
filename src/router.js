@@ -8,7 +8,10 @@ import Login from "./views/Login.vue";
 import Register from "./views/Register.vue";
 import Profile from "./views/Profile.vue";
 import Resetpassword from "./views/Resetpassword.vue";
+import ChangePassword from "./views/ChangePassword.vue"
 import PostDetail from "./views/PostDetail.vue"
+import BreedList from "./views/BreedList.vue"
+import BreedDetail from "./views/BreedDetail.vue"
 
 Vue.use(Router);
 
@@ -70,7 +73,16 @@ export default new Router({
       components: {
         header: AppHeader,
         default: Resetpassword,
-    
+        footer: AppFooter
+      }
+    },
+    {
+      path: "/changepassword",
+      name: "changepassword",
+      components: {
+        header: AppHeader,
+        default: ChangePassword,
+        footer: AppFooter
       }
     },
     {
@@ -79,6 +91,24 @@ export default new Router({
       components: {
         header: AppHeader,
         default: PostDetail,
+        footer: AppFooter
+      }
+    },
+    {
+      path: "/breedlist",
+      name: "breedlist",
+      components: {
+        header: AppHeader,
+        default: BreedList,
+        footer: AppFooter
+      }
+    },
+    {
+      path: "/breeddetail",
+      name: "breeddetail",
+      components: {
+        header: AppHeader,
+        default: BreedDetail,
         footer: AppFooter
       }
     }
