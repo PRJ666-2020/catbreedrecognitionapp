@@ -120,6 +120,18 @@ export default {
   methods: {
     onSubmit() {
       alert("Form submitted!");
+      this.$http.post('https://mighty-wave-39527.herokuapp.com/api/addUser', {
+        username: this.username,
+        password: this.password,
+        email: this.email
+      }).then(res =>{
+        console.log('res', res);
+        this.$router.push({path: '/profile' });
+      })
+      .catch(err=>{
+        console.log('err', res);
+      })
+      
     }
   }
 };

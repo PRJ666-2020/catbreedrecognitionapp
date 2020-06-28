@@ -8,6 +8,7 @@ import Login from "./views/Login.vue";
 import Register from "./views/Register.vue";
 import Profile from "./views/Profile.vue";
 import Resetpassword from "./views/Resetpassword.vue";
+import PostDetail from "./views/PostDetail.vue"
 
 Vue.use(Router);
 
@@ -16,14 +17,23 @@ export default new Router({
   routes: [
     {
       path: "/",
-      name: "components",
-    
+      name: "login",
       components: {
         header: AppHeader,
-        default: Components,
+        default: Login,
         footer: AppFooter
       }
     },
+    {
+      path: "/login",
+      name: "login",
+      components: {
+        header: AppHeader,
+        default: Login,
+        footer: AppFooter
+      }
+    },
+
     {
       path: "/landing",
       name: "landing",
@@ -35,15 +45,7 @@ export default new Router({
       }
     
     },
-    {
-      path: "/login",
-      name: "login",
-      components: {
-        header: AppHeader,
-        default: Login,
-        footer: AppFooter
-      }
-    },
+
     {
       path: "/register",
       name: "register",
@@ -68,10 +70,20 @@ export default new Router({
       components: {
         header: AppHeader,
         default: Resetpassword,
+    
+      }
+    },
+    {
+      path: "/postdetail",
+      name: "postdetail",
+      components: {
+        header: AppHeader,
+        default: PostDetail,
         footer: AppFooter
       }
     }
   ],
+
   scrollBehavior: to => {
     if (to.hash) {
       return { selector: to.hash };
