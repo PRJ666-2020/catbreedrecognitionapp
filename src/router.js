@@ -13,7 +13,7 @@ import PostDetail from "./views/PostDetail.vue"
 import CatProfile from "./views/catprofile.vue"
 import Posts from "./views/Posts.vue"
 import RecognizeBreed from "./views/recognizebreed.vue"
-Vue.use(Router,UploadImage);
+Vue.use(Router);
 
 export default new Router({
   linkExactActiveClass: "active",
