@@ -36,7 +36,7 @@
         </div>
       </div>
     </section>
-    <!-- 1st Hero Variation -->
+    <!-- TODO: Upload function -->
   </div>
 </template>
 
