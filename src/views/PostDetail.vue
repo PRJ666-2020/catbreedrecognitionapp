@@ -63,24 +63,30 @@
             </div>
           </div>
         </div>
-        
+
         <div class="container">
-          <card shadow class="shadow-lg--hover ">
+          <card shadow class="shadow-lg--hover">
             <div class="d-flex px-3">
-              
               <div class="pl-5">
-                
                 <base-input round block size="lg">
-                                    <textarea class="form-control form-control-alternative" name="name" rows="4"
-                                              cols="110" placeholder="Comment here..."></textarea>
-                            </base-input>
-             
-                <base-button class="float-right" type="default" cols="20" @click="postfunction">
-                                Post comment
-                            </base-button>
+                  <textarea
+                    class="form-control form-control-alternative"
+                    name="name"
+                    rows="4"
+                    cols="110"
+                    placeholder="Comment here..."
+                  ></textarea>
+                </base-input>
+
+                <base-button
+                  class="float-right"
+                  type="default"
+                  cols="20"
+                  @click="postfunction"
+                >Post comment</base-button>
               </div>
             </div>
-          </card>  
+          </card>
           <card shadow class="shadow-lg--hover mt-5">
             <div class="d-flex px-3">
               <div>
@@ -178,8 +184,8 @@ export default {
       this.editbut = true;
       //TODO: save to database
     },
-    postfunction(){
-        //TODO:update to database, show the comments below
+    postfunction() {
+      //TODO:update to database, show the comments below
     }
   },
   data() {

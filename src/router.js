@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Router from "vue-router";
+import UploadImage from 'vue-upload-image';
 import AppHeader from "./layout/AppHeader";
 import AppFooter from "./layout/AppFooter";
 import Components from "./views/Components.vue";
@@ -11,8 +12,8 @@ import Resetpassword from "./views/Resetpassword.vue";
 import PostDetail from "./views/PostDetail.vue"
 import CatProfile from "./views/catprofile.vue"
 import Posts from "./views/Posts.vue"
-import Test from "./views/test.vue"
-Vue.use(Router);
+import RecognizeBreed from "./views/recognizebreed.vue"
+Vue.use(Router,UploadImage);
 
 export default new Router({
   linkExactActiveClass: "active",
@@ -27,10 +28,12 @@ export default new Router({
       }
     },
     {
-      path: "/test",
-      name: "test",
+      path: "/recognize",
+      name: "recognize",
       components: {
-        default: Test
+        header: AppHeader,
+        default: RecognizeBreed,
+        footer: AppFooter
       }
     },
     {
