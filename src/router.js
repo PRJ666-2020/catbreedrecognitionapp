@@ -9,7 +9,9 @@ import Register from "./views/Register.vue";
 import Profile from "./views/Profile.vue";
 import Resetpassword from "./views/Resetpassword.vue";
 import PostDetail from "./views/PostDetail.vue"
-
+import CatProfile from "./views/catprofile.vue"
+import Posts from "./views/Posts.vue"
+import Test from "./views/test.vue"
 Vue.use(Router);
 
 export default new Router({
@@ -21,6 +23,22 @@ export default new Router({
       components: {
         header: AppHeader,
         default: Login,
+        footer: AppFooter
+      }
+    },
+    {
+      path: "/test",
+      name: "test",
+      components: {
+        default: Test
+      }
+    },
+    {
+      path: "/components",
+      name: "components",
+      components: {
+        header: AppHeader,
+        default: Components,
         footer: AppFooter
       }
     },
@@ -79,6 +97,24 @@ export default new Router({
       components: {
         header: AppHeader,
         default: PostDetail,
+        footer: AppFooter
+      }
+    },
+    {
+      path: "/catprofile",
+      name: "catprofile",
+      components: {
+        header: AppHeader,
+        default: CatProfile,
+        footer: AppFooter
+      }
+    },
+    {
+      path: "/posts",
+      name: "posts",
+      components: {
+        header: AppHeader,
+        default: Posts,
         footer: AppFooter
       }
     }
