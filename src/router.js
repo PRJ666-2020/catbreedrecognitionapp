@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Router from "vue-router";
+import UploadImage from 'vue-upload-image';
 import AppHeader from "./layout/AppHeader";
 import AppFooter from "./layout/AppFooter";
 import Components from "./views/Components.vue";
@@ -13,6 +14,9 @@ import PostDetail from "./views/PostDetail.vue"
 import BreedList from "./views/BreedList.vue"
 import BreedDetail from "./views/BreedDetail.vue"
 import RecognizeResult from "./views/RecognizeResult.vue"
+import CatProfile from "./views/catprofile.vue"
+import Posts from "./views/Posts.vue"
+import RecognizeBreed from "./views/recognizebreed.vue"
 
 Vue.use(Router);
 
@@ -25,6 +29,24 @@ export default new Router({
       components: {
         header: AppHeader,
         default: Login,
+        footer: AppFooter
+      }
+    },
+    {
+      path: "/recognize",
+      name: "recognize",
+      components: {
+        header: AppHeader,
+        default: RecognizeBreed,
+        footer: AppFooter
+      }
+    },
+    {
+      path: "/components",
+      name: "components",
+      components: {
+        header: AppHeader,
+        default: Components,
         footer: AppFooter
       }
     },
@@ -96,11 +118,18 @@ export default new Router({
       }
     },
     {
+
       path: "/breedlist",
       name: "breedlist",
       components: {
         header: AppHeader,
         default: BreedList,
+      path: "/catprofile",
+      name: "catprofile",
+      components: {
+        header: AppHeader,
+        default: CatProfile,
+
         footer: AppFooter
       }
     },
@@ -120,6 +149,12 @@ export default new Router({
       components: {
         header: AppHeader,
         default: RecognizeResult,
+
+      path: "/posts",
+      name: "posts",
+      components: {
+        header: AppHeader,
+        default: Posts,
         footer: AppFooter
       }
     }

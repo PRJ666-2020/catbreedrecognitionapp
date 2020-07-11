@@ -52,9 +52,9 @@
                         <i class="ni ni-collection d-lg-none"></i>
                         <span class="nav-link-inner--text">Account</span>
                     </a>
-                    <router-link to="/profile" class="dropdown-item">Profile</router-link>
-                    <router-link to="/login" class="dropdown-item">Login</router-link>
-                    <router-link to="/register" class="dropdown-item">Register</router-link>
+                    <router-link to="/profile" class="dropdown-item" v-show="showprofilebut">Profile</router-link>
+                    <router-link to="/login" class="dropdown-item" v-show="showloginbut">Login</router-link>
+                    <router-link to="/register" class="dropdown-item" v-show="showregisterbut">Register</router-link>
                 </base-dropdown>
             </ul>
             <ul class="navbar-nav align-items-lg-center ml-lg-auto">
@@ -107,7 +107,10 @@ export default {
   data() {
       return {
         showbreedlist: true,
-        showsearchbar: true
+        showsearchbar: true,
+        showregisterbut: true,
+        showloginbut: true,
+        showprofilebut: true
       }
   },
   watch: {
@@ -116,17 +119,29 @@ export default {
     '$route' () {
       if (this.$route.path === '/register') {
         this.showbreedlist = false,
-        this.showsearchbar = false
+        this.showsearchbar = false,
+        this.showregisterbut = false,
+        this.showloginbut = true,
+        this.showprofilebut = false
       }
       else if(this.$route.path === '/login'){
         this.showbreedlist = false,
-        this.showsearchbar = false
+        this.showsearchbar = false,
+        this.showregisterbut = true,
+        this.showloginbut = false,
+        this.showprofilebut = true
       }else if(this.$route.path === '/profile'){
         this.showbreedlist = false,
-        this.showsearchbar = false
+        this.showsearchbar = false,
+        this.showregisterbut = false,
+        this.showloginbut = false,
+        this.showprofilebut = true
       }else if(this.$route.path === '/'){
-        this.showbreedlist = true,
-        this.showsearchbar = true
+        this.showbreedlist = false,
+        this.showsearchbar = false,
+        this.showregisterbut = true,
+        this.showloginbut = true,
+        this.showprofilebut = true
       }   
     }
   }
