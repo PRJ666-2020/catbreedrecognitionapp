@@ -23,6 +23,8 @@ export default new Vuex.Store({
       dispatch('fetchUserProfile', user)
     },
     async fetchUserProfile({ commit }, user) {
+
+      console.log(user)
       // fetch user profile
       const userProfile = await fb.usersCollection.doc(user.uid).get()
 
@@ -53,13 +55,17 @@ export default new Vuex.Store({
     },
     async fetchUserProfile({ commit }, user) {
       // fetch user profile
+      console.log("THIS fetch function is called")
       const userProfile = await fb.usersCollection.doc(user.uid).get()
 
       // set user profile in state
       commit('setUserProfile', userProfile.data())
-
+      
       // change route to dashboard
       if (router.currentRoute.path === '/login') {
+        router.push('/profile')
+      }
+      if (router.currentRoute.path === '/register') {
         router.push('/profile')
       }
     }

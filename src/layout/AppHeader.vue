@@ -65,7 +65,8 @@
             <span class="nav-link-inner--text">Account</span>
           </a>
           <router-link to="/profile" class="dropdown-item">Profile</router-link>
-          <router-link to="/login" class="dropdown-item">Login</router-link>
+        
+          <router-link to="/login" class="dropdown-item" v-show="showlogin" >Login</router-link>     
           <router-link to="/register" class="dropdown-item">Register</router-link>
           <li class="dropdown-item" v-show="showlogout">
             <a @click="logout()">logout</a>
@@ -141,7 +142,8 @@ export default {
     return {
       showbreedlist: true,
       showsearchbar: true,
-      showlogout: false
+      showlogout: false,
+      showlogin: true
     };
   },
   watch: {
@@ -151,10 +153,11 @@ export default {
       if (this.$route.path === "/register") {
         (this.showbreedlist = false), (this.showsearchbar = false);
       } else if (this.$route.path === "/login") {
-        (this.showbreedlist = false), (this.showsearchbar = false);
+        (this.showbreedlist = false),(this.showsearchbar = false);
       } else if (this.$route.path === "/profile") {
         (this.showbreedlist = false),
-          (this.showsearchbar = false),
+        (this.showsearchbar = false),
+         (this.showlogin = false),
           (this.showlogout = true);
       } else if (this.$route.path === "/") {
         (this.showbreedlist = true), (this.showsearchbar = true);
@@ -165,6 +168,7 @@ export default {
     logout() {
       this.$store.dispatch("logout");
       this.showlogout = false;
+      this.showlogin = true;
     }
   }
 };
