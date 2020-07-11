@@ -68,7 +68,7 @@
           <card shadow class="shadow-lg--hover">
             <div class="d-flex px-3">
               <div class="pl-5">
-                <base-input round block size="lg">
+                <base-input placeholder="Comment here..." >
                   <textarea
                     class="form-control form-control-alternative"
                     name="name"

@@ -26,8 +26,9 @@
                             <div class="col-lg-4 order-lg-3 text-lg-right align-self-lg-center">
                                 <div class="card-profile-actions py-4 mt-lg-0">
                                     <base-button type="default" size="sm" class="mr-4">Message</base-button>
-                                    <base-button type="info" size="sm" class="mr-4">Follow</base-button>  
-                                    <base-button type="default" size="sm" class="float-right">Edit</base-button><!--TODO: Show edit button if logged in-->
+                                    <base-button type="info" size="sm" class="mr-4">Follow</base-button>            <!--TODO: If follow, update the followers in real time-->
+                                    <base-button type="default" size="sm" class="float-right" v-show="editbut" @click="editbtnf">Edit</base-button>    <!--TODO: Show edit button if logged in-->
+                                    <base-button type="default" size="sm" class="float-right" v-show="savebut" @click="savebtnf">Save</base-button>
                                 </div>
                   
                             </div>
@@ -60,15 +61,15 @@
                         </div>
                         
                         <div class="text-center mt-5">
-                            <h3>Jessica Jones</h3>
-                            <div class="h6 font-weight-300"><i class="ni location_pin mr-2"></i>Bucharest, Romania</div>
-                            <div class="h6 mt-4"><i class="ni business_briefcase-24 mr-2"></i>Solution Manager - Creative Tim Officer</div>
-                            <div><i class="ni education_hat mr-2"></i>Shorthair lover</div>
+                            <h3 ref="username">Jessica Jones</h3>
+                            <div class="h6 font-weight-300" ref="location">Bucharest, Romania</div>
+                            <div class="h6 mt-4" ref="workposition">Solution Manager - Creative Tim Officer</div>
+                            <div ref="description">Shorthair lover</div>
                         </div>
                         <div class="mt-5 py-5 border-top text-center">
                             <div class="row justify-content-center">
                                 <div class="col-lg-9">
-                                    <p>Introduction</p>
+                                    <p ref ="intro">Introduction</p>
                                    
                                 </div>
                             </div>
@@ -89,6 +90,34 @@ export default {
     BaseNav,
     CloseButton,
     BaseDropdown,
+  },
+  methods: {
+    editbtnf() {
+      this.$refs.username.contentEditable = true;
+      this.$refs.location.contentEditable = true;
+      this.$refs.workposition.contentEditable = true;
+      this.$refs.description.contentEditable = true;
+      this.$refs.intro.contentEditable = true;
+      this.$refs.username.focus();
+      this.savebut = true;
+      this.editbut = false;
+    },
+    savebtnf() {
+      this.$refs.username.contentEditable = false;
+      this.$refs.location.contentEditable = false;
+      this.$refs.workposition.contentEditable = false;
+      this.$refs.description.contentEditable = false;
+      this.$refs.intro.contentEditable = false;
+      this.savebut = false;
+      this.editbut = true;
+      //TODO: save to database
+    }
+  },
+  data() {
+    return {
+      savebut: false,
+      editbut: true
+    };
   }
 };
 </script>
