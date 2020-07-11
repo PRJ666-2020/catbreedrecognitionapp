@@ -12,6 +12,7 @@ import ChangePassword from "./views/ChangePassword.vue"
 import PostDetail from "./views/PostDetail.vue"
 import BreedList from "./views/BreedList.vue"
 import BreedDetail from "./views/BreedDetail.vue"
+import RecognizeResult from "./views/RecognizeResult.vue"
 
 Vue.use(Router);
 
@@ -109,6 +110,16 @@ export default new Router({
       components: {
         header: AppHeader,
         default: BreedDetail,
+        footer: AppFooter
+      }
+    },
+
+    {
+      path: "/result",
+      name: "result",
+      components: {
+        header: AppHeader,
+        default: RecognizeResult,
         footer: AppFooter
       }
     }
