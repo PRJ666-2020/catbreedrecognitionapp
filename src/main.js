@@ -4,7 +4,11 @@ import axios from "axios";
 import App from "./App.vue";
 import router from "./router";
 import Argon from "./plugins/argon-kit";
-import './registerServiceWorker'
+// import './registerServiceWorker'
+
+import store from './store'
+import { auth } from './firebase'
+// import './assets/scss/app.scss'
 
 Vue.config.productionTip = false;
 
