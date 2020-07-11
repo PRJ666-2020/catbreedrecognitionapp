@@ -14,13 +14,40 @@
             class="border-0"
           >
             <template>
-              <p>Please enter your email address to reset your password</p>
+              <p>Please enter your new password</p>
               <ValidationObserver v-slot="{ handleSubmit }">
                 <form @submit.prevent="handleSubmit(onSubmit)">
                   <div class="form-group">
-                    <label>Email address</label>
-                    <ValidationProvider name="Email" rules="minmax:8,25|required" v-slot="v">
-                      <input v-model="email" type="email" placeholder="Email" class="form-control" />
+                    <label>New password</label>
+                    <ValidationProvider
+                      name="Password"
+                      rules="required|password:@Confirming"
+                      v-slot="v"
+                    >
+                      <input
+                        type="password"
+                        v-model="password"
+                        placeholder="Password"
+                        class="form-control"
+                      />
+                      <small class="form-text text-muted">{{v.errors[0]}}</small>
+                    </ValidationProvider>
+                  </div>
+
+                  <div class="form-group">
+                    <label>Confirm new password</label>
+                    <ValidationProvider
+                      name="Confirming"
+                      vid="Confirming"
+                      rules="required"
+                      v-slot="v"
+                    >
+                      <input
+                        type="password"
+                        v-model="confirmation"
+                        placeholder="Confirm password"
+                        class="form-control"
+                      />
                       <small class="form-text text-muted">{{v.errors[0]}}</small>
                     </ValidationProvider>
                   </div>
@@ -64,7 +91,7 @@ export default {
   },
   methods: {
     onSubmit() {
-      alert("Link has been sent your email!");
+      alert("Your new password is setted!");
     }
   }
 };

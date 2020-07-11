@@ -9,10 +9,15 @@ import Login from "./views/Login.vue";
 import Register from "./views/Register.vue";
 import Profile from "./views/Profile.vue";
 import Resetpassword from "./views/Resetpassword.vue";
+import ChangePassword from "./views/ChangePassword.vue"
 import PostDetail from "./views/PostDetail.vue"
+import BreedList from "./views/BreedList.vue"
+import BreedDetail from "./views/BreedDetail.vue"
+import RecognizeResult from "./views/RecognizeResult.vue"
 import CatProfile from "./views/catprofile.vue"
 import Posts from "./views/Posts.vue"
 import RecognizeBreed from "./views/recognizebreed.vue"
+
 Vue.use(Router);
 
 export default new Router({
@@ -91,7 +96,16 @@ export default new Router({
       components: {
         header: AppHeader,
         default: Resetpassword,
-    
+        footer: AppFooter
+      }
+    },
+    {
+      path: "/changepassword",
+      name: "changepassword",
+      components: {
+        header: AppHeader,
+        default: ChangePassword,
+        footer: AppFooter
       }
     },
     {
@@ -104,15 +118,38 @@ export default new Router({
       }
     },
     {
+
+      path: "/breedlist",
+      name: "breedlist",
+      components: {
+        header: AppHeader,
+        default: BreedList,
       path: "/catprofile",
       name: "catprofile",
       components: {
         header: AppHeader,
         default: CatProfile,
+
         footer: AppFooter
       }
     },
     {
+      path: "/breeddetail",
+      name: "breeddetail",
+      components: {
+        header: AppHeader,
+        default: BreedDetail,
+        footer: AppFooter
+      }
+    },
+
+    {
+      path: "/result",
+      name: "result",
+      components: {
+        header: AppHeader,
+        default: RecognizeResult,
+
       path: "/posts",
       name: "posts",
       components: {
