@@ -4,14 +4,6 @@ import router from './router'
 import store from './store'
 import { auth } from './firebase'
 import Argon from "./plugins/argon-kit";
-<<<<<<< HEAD
-// import './registerServiceWorker'
-
-import store from './store'
-import { auth } from './firebase'
-// import './assets/scss/app.scss'
-=======
->>>>>>> RecognizeCatPage
 
 Vue.config.productionTip = false
 Vue.use(Argon);
