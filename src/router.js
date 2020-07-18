@@ -102,6 +102,15 @@ export default new Router({
         footer: AppFooter
       }
     },
+    {
+      path: "/changepassword",
+      name: "changepassword",
+      components: {
+        header: AppHeader,
+        default: ChangePassword,
+        footer: AppFooter
+      }
+    },
 
     {
       path: "/changepassword",
@@ -133,11 +142,21 @@ export default new Router({
     },
 
     {
+
+      path: "/breedlist",
+      name: "breedlist",
+      components: {
+        header: AppHeader,
+        default: BreedList,
+      }
+    },
+    {
       path: "/catprofile",
       name: "catprofile",
       components: {
         header: AppHeader,
         default: CatProfile,
+
         footer: AppFooter
       }
     },
@@ -162,6 +181,24 @@ export default new Router({
       }
     },
 
+    {
+      path: "/breeddetail",
+      name: "breeddetail",
+      components: {
+        header: AppHeader,
+        default: BreedDetail,
+        footer: AppFooter
+      }
+    },
+
+    {
+      path: "/result",
+      name: "result",
+      components: {
+        header: AppHeader,
+        default: RecognizeResult,
+      }
+    },
     {
       path: "/posts",
       name: "posts",
