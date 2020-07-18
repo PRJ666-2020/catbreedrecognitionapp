@@ -18,9 +18,7 @@
                         <div class="row justify-content-center">
                             <div class="col-lg-3 order-lg-2">
                                 <div class="card-profile-image">
-                                    <a href="#">
                                         <img v-lazy="'img/theme/longhair.jpg'" class="rounded-circle">
-                                    </a>
                                 </div>
                             </div>
                             <div class="col-lg-4 order-lg-3 text-lg-right align-self-lg-center">

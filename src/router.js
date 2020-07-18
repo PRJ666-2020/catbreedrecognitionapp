@@ -1,6 +1,5 @@
 import Vue from "vue";
 import Router from "vue-router";
-import UploadImage from 'vue-upload-image';
 import AppHeader from "./layout/AppHeader";
 import AppFooter from "./layout/AppFooter";
 import Components from "./views/Components.vue";
@@ -9,10 +8,16 @@ import Login from "./views/Login.vue";
 import Register from "./views/Register.vue";
 import Profile from "./views/Profile.vue";
 import Resetpassword from "./views/Resetpassword.vue";
+import ChangePassword from "./views/ChangePassword.vue"
 import PostDetail from "./views/PostDetail.vue"
+import BreedList from "./views/BreedList.vue"
+import BreedDetail from "./views/BreedDetail.vue"
+import RecognizeResult from "./views/RecognizeResult.vue"
 import CatProfile from "./views/catprofile.vue"
 import Posts from "./views/Posts.vue"
 import RecognizeBreed from "./views/recognizebreed.vue"
+import Homepage from "./views/Homepage.vue"
+
 Vue.use(Router);
 
 export default new Router({
@@ -27,6 +32,7 @@ export default new Router({
         footer: AppFooter
       }
     },
+
     {
       path: "/recognize",
       name: "recognize",
@@ -36,6 +42,7 @@ export default new Router({
         footer: AppFooter
       }
     },
+
     {
       path: "/components",
       name: "components",
@@ -45,6 +52,7 @@ export default new Router({
         footer: AppFooter
       }
     },
+
     {
       path: "/login",
       name: "login",
@@ -58,13 +66,11 @@ export default new Router({
     {
       path: "/landing",
       name: "landing",
-
       components: {
         header: AppHeader,
         default: Landing,
         footer: AppFooter
       }
-    
     },
 
     {
@@ -76,6 +82,7 @@ export default new Router({
         footer: AppFooter
       }
     },
+
     {
       path: "/profile",
       name: "profile",
@@ -85,15 +92,27 @@ export default new Router({
         footer: AppFooter
       }
     },
+
     {
       path: "/resetpassword",
       name: "resetpassword",
       components: {
         header: AppHeader,
         default: Resetpassword,
-    
+        footer: AppFooter
       }
     },
+
+    {
+      path: "/changepassword",
+      name: "changepassword",
+      components: {
+        header: AppHeader,
+        default: ChangePassword,
+        footer: AppFooter
+      }
+    },
+
     {
       path: "/postdetail",
       name: "postdetail",
@@ -103,6 +122,16 @@ export default new Router({
         footer: AppFooter
       }
     },
+
+    {
+      path: "/breedlist",
+      name: "breedlist",
+      components: {
+        header: AppHeader,
+        default: BreedList,
+      }
+    },
+
     {
       path: "/catprofile",
       name: "catprofile",
@@ -112,12 +141,43 @@ export default new Router({
         footer: AppFooter
       }
     },
+
+    {
+      path: "/breeddetail",
+      name: "breeddetail",
+      components: {
+        header: AppHeader,
+        default: BreedDetail,
+        footer: AppFooter
+      }
+    },
+
+    {
+      path: "/result",
+      name: "result",
+      components: {
+        header: AppHeader,
+        default: RecognizeResult,
+        footer: AppFooter
+      }
+    },
+
     {
       path: "/posts",
       name: "posts",
       components: {
         header: AppHeader,
         default: Posts,
+        footer: AppFooter
+      }
+    },
+
+    {
+      path: "/home",
+      name: "homepage",
+      components: {
+        header: AppHeader,
+        default: Homepage,
         footer: AppFooter
       }
     }
