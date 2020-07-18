@@ -5,7 +5,7 @@ import router from '../router/index'
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({
+const store = new Vuex.Store({
   state: {
     userProfile: {}
   },
@@ -30,7 +30,9 @@ export default new Vuex.Store({
       commit('setUserProfile', userProfile.data())
 
       // change route to dashboard
-      router.push('/')
+      if (router.currentRoute.path === '/login') {
+        router.push('/profile')
+      }
     },
     async signup({ dispatch }, form) {
       // sign user up
@@ -65,3 +67,5 @@ export default new Vuex.Store({
     }
   }
 })
+
+export default store
