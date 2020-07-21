@@ -40,6 +40,11 @@ const store = new Vuex.Store({
       if (router.currentRoute.path === '/login') {
         router.push('/profile')
       }
+      if (router.currentRoute.path === '/register') {
+        router.push('/profile')
+      }
+
+
     },
     async signup({ dispatch }, form) {
       // sign user up

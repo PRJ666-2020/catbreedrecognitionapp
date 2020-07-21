@@ -9,6 +9,8 @@ import Register from "../views/Register.vue";
 import Profile from "../views/Profile.vue";
 import Resetpassword from "../views/Resetpassword.vue";
 import PostDetail from "../views/PostDetail.vue"
+import recognizebreed from "../views/recognizebreed.vue"
+
 import { auth } from '../firebase'
 
 Vue.use(Router)
@@ -62,6 +64,16 @@ const routes = [
       footer: AppFooter
     }
   },
+  {
+    path: "/recognize",
+    name: "Recognize",
+    components: {
+      header: AppHeader,
+      default: recognizebreed,
+      footer: AppFooter
+    }
+  },
+
 ]
 
 const router = new Router({

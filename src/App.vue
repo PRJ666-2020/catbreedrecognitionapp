@@ -13,9 +13,11 @@
 import { mapState } from "vuex";
 import { FadeTransition } from "vue2-transitions";
 
+
 export default {
   components: {
-    FadeTransition
+    FadeTransition,
+
   },
   computed: {
     ...mapState(["userProfile"]),

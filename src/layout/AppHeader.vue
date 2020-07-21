@@ -22,6 +22,8 @@
             <i class="ni ni-ui-04 d-lg-none"></i>
             <span class="nav-link-inner--text">Breed</span>
           </a>
+          <router-link to="/recognize" class="dropdown-item" >Rcognize Breed</router-link>
+          <router-link to="/login" class="dropdown-item" >Cat Breed list</router-link>
           <div class="dropdown-menu-inner">
             <a
               href="https://demos.creative-tim.com/vue-argon-design-system/documentation/"
@@ -140,35 +142,11 @@ export default {
       return Object.keys(this.userProfile).length > 0;
     }
   },
-  // data() {
-  //   return {
-  //     // showbreedlist: true,
-  //     // showsearchbar: true,
-  //     showLogout: false
-  //   };
-  // },
-  // watch: {
-  //   //if user logged in dont show login or register
-
-  //   $route() {
-  //     if (this.$route.path === "/register") {
-  //       (this.showbreedlist = false), (this.showsearchbar = false);
-  //     } else if (this.$route.path === "/login") {
-  //       (this.showbreedlist = false), (this.showsearchbar = false);
-  //     } else if (this.$route.path === "/profile") {
-  //       (this.showbreedlist = false),
-  //         (this.showsearchbar = false),
-  //         (this.showlogout = true);
-  //     } else if (this.$route.path === "/") {
-  //       (this.showbreedlist = true), (this.showsearchbar = true);
-  //     }
-  //   }
-  // },
+     
   methods: {
     logout() {
       this.$store.dispatch("logout");
-      this.showlogout = false;
-      this.showlogin = true;
+
     }
   }
 };
