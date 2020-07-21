@@ -6,13 +6,17 @@ import * as fb from '../firebase'
 import router from '../router/index'
 Vue.use(Vuex)
 
-export default new Vuex.Store({
+const store = new Vuex.Store({
   state: {
-    userProfile: {}
+    userProfile: {},
+    posts: []
   },
   mutations: {
     setUserProfile(state, val) {
       state.userProfile = val
+    },
+    setPosts(state, val) {
+      state.posts = val
     }
   },
   actions: {
@@ -33,7 +37,9 @@ export default new Vuex.Store({
       commit('setUserProfile', userProfile.data())
 
       // change route to dashboard
-      router.push('/profile')
+      if (router.currentRoute.path === '/login') {
+        router.push('/profile')
+      }
     },
     async signup({ dispatch }, form) {
       // sign user up
@@ -67,9 +73,40 @@ export default new Vuex.Store({
       if (router.currentRoute.path === '/login') {
         router.push('/profile')
       }
-      if (router.currentRoute.path === '/register') {
-        router.push('/profile')
-      }
+    },
+    async likePost({ commit }, post) {
+      const userId = fb.auth.currentUser.uid
+      const docId = `${userId}_${post.id}`
+
+      // check if user has liked post
+      const doc = await fb.likesCollection.doc(docId).get()
+      if (doc.exists) { return }
+
+      // create post
+      await fb.likesCollection.doc(docId).set({
+        postId: post.id,
+        userId: userId
+      })
+
+      // update post likes count
+      fb.postsCollection.doc(post.id).update({
+        likes: post.likesCount + 1
+      })
     }
   }
 })
+
+fb.postsCollection.orderBy('createdOn', 'desc').onSnapshot(snapshot => {
+  let postsArray = []
+
+  snapshot.forEach(doc => {
+    let post = doc.data()
+    post.id = doc.id
+
+    postsArray.push(post)
+  })
+
+  store.commit('setPosts', postsArray)
+})
+
+export default store

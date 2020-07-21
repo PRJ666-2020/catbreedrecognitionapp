@@ -16,15 +16,12 @@ Vue.use(Router)
 const routes = [
   {
     path: '/',
-    name: 'Profile',
+    name: 'Login',
     components: {
       header: AppHeader,
-      default: Profile,
+      default: Login,
       footer: AppFooter
     },
-    meta: {
-      requiresAuth: true
-    }
   },
   {
     path: '/login',
@@ -84,83 +81,3 @@ router.beforeEach((to, from, next) => {
 })
 
 export default router
-// export default new Router({
-//   linkExactActiveClass: "active",
-//   routes: [
-//     {
-//       path: "/",
-//       name: "",
-//       components: {
-//         header: AppHeader,
-//         default: Login,
-//         footer: AppFooter
-//       }
-//     },
-//     {
-//       path: "/login",
-//       name: "login",
-//       components: {
-//         header: AppHeader,
-//         default: Login,
-//         footer: AppFooter
-//       }
-//     },
-
-//     {
-//       path: "/landing",
-//       name: "landing",
-
-//       components: {
-//         header: AppHeader,
-//         default: Landing,
-//         footer: AppFooter
-//       }
-
-//     },
-
-//     {
-//       path: "/register",
-//       name: "register",
-//       components: {
-//         header: AppHeader,
-//         default: Register,
-//         footer: AppFooter
-//       }
-//     },
-//     {
-//       path: "/profile",
-//       name: "profile",
-//       components: {
-//         header: AppHeader,
-//         default: Profile,
-//         footer: AppFooter
-//       }
-//     },
-//     {
-//       path: "/resetpassword",
-//       name: "resetpassword",
-//       components: {
-//         header: AppHeader,
-//         default: Resetpassword,
-
-//       }
-//     },
-//     {
-//       path: "/postdetail",
-//       name: "postdetail",
-//       components: {
-//         header: AppHeader,
-//         default: PostDetail,
-//         footer: AppFooter
-//       }
-//     }
-//   ],
-
-//   scrollBehavior: to => {
-//     if (to.hash) {
-//       return { selector: to.hash };
-//     } else {
-//       return { x: 0, y: 0 };
-//     }
-//   }
-// });
