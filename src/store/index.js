@@ -5,6 +5,19 @@ import router from '../router/index'
 
 Vue.use(Vuex)
 
+fb.postsCollection.orderBy('createdOn', 'desc').onSnapshot(snapshot => {
+  let postsArray = []
+
+  snapshot.forEach(doc => {
+    let post = doc.data()
+    post.id = doc.id
+
+    postsArray.push(post)
+  })
+
+  store.commit('setPosts', postsArray)
+})
+
 const store = new Vuex.Store({
   state: {
     userProfile: {},
@@ -57,18 +70,6 @@ const store = new Vuex.Store({
       commit('setUserProfile', {})
       router.push('/login')
     },
-    async fetchUserProfile({ commit }, user) {
-      // fetch user profile
-      const userProfile = await fb.usersCollection.doc(user.uid).get()
-
-      // set user profile in state
-      commit('setUserProfile', userProfile.data())
-
-      // change route to dashboard
-      if (router.currentRoute.path === '/login') {
-        router.push('/profile')
-      }
-    },
     async likePost({ commit }, post) {
       const userId = fb.auth.currentUser.uid
       const docId = `${userId}_${post.id}`
@@ -87,21 +88,33 @@ const store = new Vuex.Store({
       fb.postsCollection.doc(post.id).update({
         likes: post.likesCount + 1
       })
+    },
+    async updateProfile({ dispatch }, user) {
+      const userId = fb.auth.currentUser.uid
+      // update user object
+      const userRef = await fb.usersCollection.doc(userId).update({
+        username: user.username
+      })
+
+      dispatch('fetchUserProfile', { uid: userId })
+
+      // update all posts by user
+      const postDocs = await fb.postsCollection.where('userId', '==', userId).get()
+      postDocs.forEach(doc => {
+        fb.postsCollection.doc(doc.id).update({
+          userName: user.username
+        })
+      })
+
+      // update all comments by user
+      const commentDocs = await fb.commentsCollection.where('userId', '==', userId).get()
+      commentDocs.forEach(doc => {
+        fb.commentsCollection.doc(doc.id).update({
+          userName: user.username
+        })
+      })
     }
   }
-})
-
-fb.postsCollection.orderBy('createdOn', 'desc').onSnapshot(snapshot => {
-  let postsArray = []
-
-  snapshot.forEach(doc => {
-    let post = doc.data()
-    post.id = doc.id
-
-    postsArray.push(post)
-  })
-
-  store.commit('setPosts', postsArray)
 })
 
 export default store
