@@ -17,35 +17,11 @@
             </div>
 
             <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
-                <base-dropdown class="nav-item" menu-classes="dropdown-menu-xl" v-show="showbreedlist">
-                    <a slot="title" href="#" class="nav-link" data-toggle="dropdown" role="button">
+                <base-dropdown v-show="showbreedlist">
+                    <a slot="title" href="/home" class="nav-link" data-toggle="dropdown" role="button">
                         <i class="ni ni-ui-04 d-lg-none"></i>
-                        <span class="nav-link-inner--text">Breed</span>
+                       <router-link to="/home" class="nav-link-inner--text">Breed</router-link>
                     </a>
-                    <div class="dropdown-menu-inner">
-                        <a href="https://demos.creative-tim.com/vue-argon-design-system/documentation/"
-                           class="media d-flex align-items-center">
-                            <div >   
-                                <img v-lazy="'img/theme/shorthair.jpg'" alt="Raised circle image"
-                                class="img-fluid rounded-circle shadow-lg" style="width: 50px;">                             
-                            </div>
-                            <div class="media-body ml-3">
-                                <h6 class="heading text-primary mb-md-1">Short hair</h6>
-                                <p class="description d-none d-md-inline-block mb-0">Short hair list</p>
-                            </div>
-                        </a>
-                        <a href="https://demos.creative-tim.com/vue-argon-design-system/documentation/"
-                           class="media d-flex align-items-center">
-                            <div >
-                                <img v-lazy="'img/theme/longhair.jpg'" alt="Raised circle image"
-                                class="img-fluid rounded-circle shadow-lg" style="width: 50px;"> 
-                            </div>
-                            <div class="media-body ml-3">
-                                <h5 class="heading text-warning mb-md-1">Long hair</h5>
-                                <p class="description d-none d-md-inline-block mb-0">Long hair list</p>
-                            </div>
-                        </a>
-                    </div>
                 </base-dropdown>
                 <base-dropdown tag="li" class="nav-item">
                     <a slot="title" href="#" class="nav-link" data-toggle="dropdown" role="button">
@@ -56,6 +32,10 @@
                     <router-link to="/login" class="dropdown-item" v-show="showloginbut">Login</router-link>
                     <router-link to="/register" class="dropdown-item" v-show="showregisterbut">Register</router-link>
                 </base-dropdown>
+                 <a slot="title" href="#" class="nav-link" data-toggle="dropdown" role="button">
+                        <i class="ni ni-collection d-lg-none"></i>
+                        <router-link to="/posts" class="nav-link-inner--text">Posts</router-link>
+                </a>
             </ul>
             <ul class="navbar-nav align-items-lg-center ml-lg-auto">
                 <li class="nav-item" v-show="showsearchbar">

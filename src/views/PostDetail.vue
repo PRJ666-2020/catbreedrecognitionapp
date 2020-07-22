@@ -66,7 +66,6 @@
                     <base-button
                       class="float-right"
                       type="primary"
-                      @click="postfunction"
                     >Post</base-button>
                    
                     <div class="pl-md-6 col-md-8" >
@@ -117,9 +116,6 @@ export default {
     TabPane
   },
   methods: {
-    postfunction() {
-      //TODO:update to database, show the comments below
-    },
     handleRemove(file) {
         console.log(file);
       },
