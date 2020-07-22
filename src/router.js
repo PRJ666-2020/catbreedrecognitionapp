@@ -1,4 +1,6 @@
 import Vue from "vue";
+import Element from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
 import Router from "vue-router";
 import AppHeader from "./layout/AppHeader";
 import AppFooter from "./layout/AppFooter";
@@ -18,7 +20,9 @@ import Posts from "./views/Posts.vue"
 import RecognizeBreed from "./views/recognizebreed.vue"
 import Homepage from "./views/Homepage.vue"
 
+
 Vue.use(Router);
+Vue.use(Element);
 
 export default new Router({
   linkExactActiveClass: "active",
@@ -102,15 +106,6 @@ export default new Router({
         footer: AppFooter
       }
     },
-    {
-      path: "/changepassword",
-      name: "changepassword",
-      components: {
-        header: AppHeader,
-        default: ChangePassword,
-        footer: AppFooter
-      }
-    },
 
     {
       path: "/changepassword",
@@ -142,21 +137,11 @@ export default new Router({
     },
 
     {
-
-      path: "/breedlist",
-      name: "breedlist",
-      components: {
-        header: AppHeader,
-        default: BreedList,
-      }
-    },
-    {
       path: "/catprofile",
       name: "catprofile",
       components: {
         header: AppHeader,
         default: CatProfile,
-
         footer: AppFooter
       }
     },
@@ -181,24 +166,6 @@ export default new Router({
       }
     },
 
-    {
-      path: "/breeddetail",
-      name: "breeddetail",
-      components: {
-        header: AppHeader,
-        default: BreedDetail,
-        footer: AppFooter
-      }
-    },
-
-    {
-      path: "/result",
-      name: "result",
-      components: {
-        header: AppHeader,
-        default: RecognizeResult,
-      }
-    },
     {
       path: "/posts",
       name: "posts",

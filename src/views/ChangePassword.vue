@@ -10,10 +10,6 @@
             <span></span>
             <span></span>
         </div>
-  <section class="section section-shaped section-lg my-0">
-    <div class="shape shape-style-1 bg-gradient-default">
-
-    </div>
     <div class="container pt-lg-md">
       <div class="row justify-content-center">
         <div class="col-lg-5">
@@ -83,14 +79,11 @@
               </a>
             </div>
           </div>
-
           <br>
         </div>
-      
-
-        </div>
       </div>
-      <br />
+      
+    </div>
   </section>
 </template>
 <script>
