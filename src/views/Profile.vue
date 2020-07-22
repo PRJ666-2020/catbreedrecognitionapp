@@ -25,20 +25,25 @@
               </div>
               <div class="col-lg-4 order-lg-3 text-lg-right align-self-lg-center">
                 <div class="card-profile-actions py-4 mt-lg-0">
-                  <base-button type="default" size="sm" class="mr-4">Message</base-button>
-                  <base-button type="info" size="sm" class="mr-4">Follow</base-button>
-                  <base-button type="default" size="sm" class="float-right">Edit</base-button>
+                  <!-- <base-button type="default" size="sm" class="mr-4">Message</base-button> -->
+                  <!-- <base-button type="info" size="sm" class="mr-4">Follow</base-button> -->
+                  <base-button
+                    type="default"
+                    size="sm"
+                    class="float-right"
+                    @click="toggleUpdateProfileModal()"
+                  >Edit</base-button>
                 </div>
               </div>
 
               <div class="col-lg-4 order-lg-1">
                 <div class="card-profile-stats d-flex justify-content-center">
-                  <div>
+                  <!-- <div>
                     <span class="heading">2</span>
                     <span class="description">Cat(s)</span>
-                  </div>
+                  </div>-->
                   <div>
-                    <span class="heading">10</span>
+                    <span class="heading">{{posts.length}}</span>
                     <span class="description">Posts</span>
                   </div>
                 </div>
@@ -79,19 +84,19 @@
         </card>
       </div>
     </section>
-    <modal :show.sync="showPostModal">
+
+    <modal :show.sync="showPostModal" :showClose="false">
       <div slot="header">
         <h4>{{ fullPost.title }}</h4>
         <small>Posted {{fullPost.createdOn | formatDate}}</small>
       </div>
       <h5>{{ fullPost.content }}</h5>
       <div v-show="postComments.length" class="modal-body">
-        <div v-for="comment in postComments" :key="comment.id">
-          <hr />
-          <p>{{ comment.userName }}</p>
-          <small>{{ comment.createdOn | formatDate }}</small>
-          <p>{{ comment.content }}</p>
-        </div>
+        <template v-for="comment in postComments">
+          <p :key="comment.id + '-userName'">{{ comment.userName }}</p>
+          <small :key="comment.id + '-createdOn'">{{ comment.createdOn | formatDate }}</small>
+          <p :key="comment.id + '-content'">{{ comment.content }}</p>
+        </template>
       </div>
       <template slot="footer">
         <base-button
@@ -108,9 +113,8 @@
       </template>
     </modal>
 
-    <modal :show.sync="showCommentModal">
-      <div slot="header">Add a comment</div>
-      <!-- <form @submit.prevent> -->
+    <modal :show.sync="showCommentModal" :showClose="false">
+      <template slot="header">Add a comment</template>
       <base-input placeholder="Comment here...">
         <textarea
           class="form-control form-control-alternative"
@@ -130,7 +134,21 @@
         >Save</base-button>
         <base-button type="link" class="ml-auto" @click="toggleCommentModal()">Close</base-button>
       </template>
-      <!-- </form> -->
+    </modal>
+
+    <modal :show.sync="showEditProfileModal" :showClose="false">
+      <template slot="header">Edit your profile</template>
+      <label for="username">Username</label>
+      <base-input
+        v-model.trim="username"
+        type="text"
+        :placeholder="userProfile.username"
+        id="username"
+      />
+      <template slot="footer">
+        <base-button type="link" class="ml-auto" @click="updateProfile()">Save</base-button>
+        <base-button type="link" class="ml-auto" @click="toggleUpdateProfileModal()">Close</base-button>
+      </template>
     </modal>
   </div>
 </template>
@@ -153,12 +171,14 @@ export default {
         title: "",
         content: ""
       },
+      showEditProfileModal: false,
       showCommentModal: false,
       selectedPost: {},
       showPostModal: false,
       fullPost: {},
       postComments: [],
-      comment: ""
+      comment: "",
+      username: ""
     };
   },
   computed: {
@@ -202,6 +222,7 @@ export default {
       });
 
       // close modal
+      this.comment = "";
       this.showCommentModal = !this.showCommentModal;
       // toggleCommentModal();
     },
@@ -212,6 +233,17 @@ export default {
       } else {
         this.selectedPost = {};
       }
+      this.comment = "";
+    },
+    toggleUpdateProfileModal() {
+      this.showEditProfileModal = !this.showEditProfileModal;
+    },
+    updateProfile() {
+      this.$store.dispatch("updateProfile", {
+        username:
+          this.username !== "" ? this.username : this.userProfile.username
+      });
+      this.username = "";
     }
   },
   filters: {
