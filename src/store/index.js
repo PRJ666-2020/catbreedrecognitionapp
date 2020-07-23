@@ -55,11 +55,17 @@ const store = new Vuex.Store({
       if (router.currentRoute.path === '/login') {
         router.push('/profile')
       }
+<<<<<<< HEAD
       if (router.currentRoute.path === '/register') {
         router.push('/profile')
       }
 
 
+=======
+      else if (router.currentRoute.path === '/register') {
+        router.push('/profile')
+      }
+>>>>>>> RecognizeCatPage
     },
 
     async signup({ dispatch }, form) {
@@ -125,6 +131,52 @@ const store = new Vuex.Store({
           userName: user.username
         })
       })
+    },
+    async updatePost({ dispatch }, post) {
+      const postRef = await fb.postsCollection.doc(post.id).update({
+        title: post.title,
+        content: post.content,
+        createdOn: new Date()
+      })
+    },
+    async createPost({ state, commit }, post) {
+      // let images = [];
+      // post.picture.forEach(picture => {
+      //   var imagesRef = fb.store.ref(fb.auth.currentUser.uid + '/' + picture.name);
+      //   var uploadTask = imagesRef.put(picture);
+      //   uploadTask.on('state_changed', (snapshot) => {
+
+      //   }, (error) => {
+      //   }, () => {
+      //     uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+      //       images.push(downloadURL)
+      //     })
+      //   });
+      // })
+      await fb.postsCollection.add({
+        createdOn: new Date(),
+        title: post.title,
+        content: post.content,
+        picture: post.picture,
+        userId: fb.auth.currentUser.uid,
+        userName: state.userProfile.username,
+        comments: 0,
+        likes: 0
+      });
+    },
+    async deletePost({ state, commit }, id) {
+      const userId = fb.auth.currentUser.uid
+      const likeId = `${userId}_${id}`
+      fb.db.collection("posts").doc(id).delete()
+        .then(fb.db.collection("likes").doc(likeId).delete())
+        .then(fb.commentsCollection.where("postId", "==", id)
+          .get()
+          .then(function (querySnapshot) {
+            querySnapshot.forEach(doc => {
+              fb.db.collection("comments").doc(doc.id).delete()
+            })
+          })
+        )
     }
   }
 })

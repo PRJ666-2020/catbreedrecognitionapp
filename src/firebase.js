@@ -1,6 +1,7 @@
-import * as firebase from 'firebase/app'
-import 'firebase/auth'
+import firebase from 'firebase/app'
 import 'firebase/firestore'
+import 'firebase/auth'
+import 'firebase/storage'
 
 // firebase init - add your own config here
 const firebaseConfig = {
@@ -16,6 +17,7 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig)
 
 // utils
+const store = firebase.storage()
 const db = firebase.firestore()
 const auth = firebase.auth()
 
@@ -27,6 +29,7 @@ const likesCollection = db.collection('likes')
 
 // export utils/refs
 export {
+    store,
     db,
     auth,
     usersCollection,
