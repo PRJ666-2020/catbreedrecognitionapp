@@ -142,16 +142,27 @@ const store = new Vuex.Store({
         createdOn: new Date(),
         title: post.title,
         content: post.content,
-        // picture: [],
+        picture: post.picture,
         userId: fb.auth.currentUser.uid,
         userName: state.userProfile.username,
         comments: 0,
         likes: 0
       });
+    },
+    async deletePost({ state, commit }, id) {
+      const userId = fb.auth.currentUser.uid
+      const likeId = `${userId}_${id}`
+      fb.db.collection("posts").doc(id).delete()
+        .then(fb.db.collection("likes").doc(likeId).delete())
+        .then(fb.commentsCollection.where("postId", "==", id)
+          .get()
+          .then(function (querySnapshot) {
+            querySnapshot.forEach(doc => {
+              fb.db.collection("comments").doc(doc.id).delete()
+            })
+          })
+        )
     }
-    // async deletePost({ state, commit }, id) {
-    //   db.collection("likesCollection")
-    // }
   }
 })
 

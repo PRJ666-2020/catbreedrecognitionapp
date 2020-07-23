@@ -92,9 +92,21 @@
         <h4>{{ fullPost.title }}</h4>
         <small>Posted {{fullPost.createdOn | formatDate}}</small>
       </div>
-      <div v-for="picture in fullPost.picture" :key="picture.id">
-        <img :src="picture" alt />
-      </div>
+      <b-carousel
+        id="carousel-1"
+        v-model="slide"
+        :interval="4000"
+        controls
+        indicators
+        img-height="480"
+        background="#ababab"
+        style="text-shadow: 1px 1px 2px #333;"
+        @sliding-start="onSlideStart"
+        @sliding-end="onSlideEnd"
+      >
+        <b-carousel-slide v-for="picture in fullPost.picture" :key="picture.id" :img-src="picture" />
+      </b-carousel>
+
       <h5>{{ fullPost.content }}</h5>
       <div v-show="postComments.length" class="modal-body">
         <div v-for="comment in postComments" :key="comment.id">
@@ -115,11 +127,11 @@
           class="ml-auto"
           @click="closePostModal() | toggleCommentModal(fullPost)"
         >Comment</base-button>
-        <!-- <base-button
+        <base-button
           type="link"
           class="ml-auto"
-          @click="closePostModal() | deletePostModal(fullPost.id)"
-        >Delete</base-button>-->
+          @click="closePostModal() | deletePost(fullPost.id)"
+        >Delete</base-button>
         <base-button type="link" class="ml-auto" @click="closePostModal()">Close</base-button>
       </template>
     </modal>
@@ -185,15 +197,6 @@
         :placeholder="selectedPost.content"
         v-model.trim="editedContent"
       ></textarea>
-      <!-- <div class="col-md-6">
-                  <label for="picture">Pictures</label>
-                  <input type="file" @change="addImage" />
-                  <hr />
-                  <div v-for="picture in createdPost.picture" :key="picture.id">
-                    <img :src="picture" alt width="80px" />
-                    <hr />
-                  </div>
-      </div>-->
       <template slot="footer">
         <base-button
           type="link"
@@ -223,12 +226,19 @@
         v-model.trim="createdPost.content"
         id="content2"
       ></textarea>
-
+      <label for="picture">Pictures</label>
+      <br />
+      <input type="file" @change="addImage" />
+      <hr />
+      <div v-for="picture in createdPost.picture" :key="picture.id">
+        <img :src="picture" alt width="250px" />
+        <hr />
+      </div>
       <template slot="footer">
         <base-button
           type="link"
           class="ml-auto"
-          @click="createPost()"
+          @click="createPost() | toggleCreatePostModal()"
           :disabled="createdPost.content == '' || createdPost.title == ''"
         >Create</base-button>
         <base-button type="link" class="ml-auto" @click="toggleCreatePostModal()">Close</base-button>
@@ -243,22 +253,23 @@ import { commentsCollection, postsCollection } from "@/firebase";
 import Modal from "@/components/Modal";
 import BaseInput from "@/components/BaseInput";
 import { auth } from "@/firebase";
+import * as fb from "@/firebase";
 
 export default {
   components: {
     Modal,
-    BaseInput
+    BaseInput,
   },
   data() {
     return {
       post: {
         title: "",
-        content: ""
+        content: "",
       },
       createdPost: {
         content: "",
-        title: ""
-        // picture: []
+        title: "",
+        picture: [],
       },
       showEditProfileModal: false,
       showEditPostModal: false,
@@ -271,11 +282,13 @@ export default {
       comment: "",
       username: "",
       editedContent: "",
-      editedTitle: ""
+      editedTitle: "",
+      slide: 0,
+      sliding: null,
     };
   },
   computed: {
-    ...mapState(["userProfile", "posts"])
+    ...mapState(["userProfile", "posts"]),
   },
   methods: {
     likePost(id, likesCount) {
@@ -285,7 +298,7 @@ export default {
       const docs = await commentsCollection
         .where("postId", "==", post.id)
         .get();
-      docs.forEach(doc => {
+      docs.forEach((doc) => {
         let comment = doc.data();
         comment.id = doc.id;
         this.postComments.push(comment);
@@ -303,10 +316,10 @@ export default {
         content: this.comment,
         postId: this.selectedPost.id,
         userId: auth.currentUser.uid,
-        userName: this.$store.state.userProfile.username
+        userName: this.$store.state.userProfile.username,
       });
       await postsCollection.doc(this.selectedPost.id).update({
-        comments: parseInt(this.selectedPost.comments) + 1
+        comments: parseInt(this.selectedPost.comments) + 1,
       });
       this.comment = "";
       this.showCommentModal = !this.showCommentModal;
@@ -337,7 +350,7 @@ export default {
     async updateProfile() {
       this.$store.dispatch("updateProfile", {
         username:
-          this.username !== "" ? this.username : this.userProfile.username
+          this.username !== "" ? this.username : this.userProfile.username,
       });
       this.username = "";
     },
@@ -356,18 +369,36 @@ export default {
       this.$store.dispatch("createPost", {
         content: this.createdPost.content,
         title: this.createdPost.title,
-        picture: this.createdPost.picture
+        picture: this.createdPost.picture,
       });
       this.createdPost.content = "";
       this.createdPost.title = "";
       this.createdPost.picture = [];
-    }
-    // async deletePost(id) {
-    //   this.$store.dispatch("deletePost", id);
-    // }
-    // addImage(image) {
-    //   this.createdPost.picture.push(image.target.files[0]);
-    // }
+    },
+    async deletePost(id) {
+      this.$store.dispatch("deletePost", id);
+    },
+    addImage(i) {
+      let image = i.target.files[0];
+      let storeRef = fb.store.ref(fb.auth.currentUser.uid + "/" + image.name);
+      let uploadTask = storeRef.put(image);
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {},
+        (error) => {},
+        () => {
+          uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+            this.createdPost.picture.push(downloadURL);
+          });
+        }
+      );
+    },
+    onSlideStart(slide) {
+      this.sliding = true;
+    },
+    onSlideEnd(slide) {
+      this.sliding = false;
+    },
   },
   filters: {
     formatDate(val) {
@@ -383,8 +414,8 @@ export default {
         return val;
       }
       return `${val.substring(0, 150)}...`;
-    }
-  }
+    },
+  },
 };
 </script>
 <style>
