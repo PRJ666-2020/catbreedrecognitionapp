@@ -10,13 +10,7 @@
   },
   "dependencies": {
     "axios": "^0.19.2",
-<<<<<<< HEAD
-    "bootstrap-vue": "^2.0.4",
-    "element": "^0.1.4",
-    "element-ui": "^2.13.2",
-=======
     "bootstrap-vue": "^2.15.0",
->>>>>>> RecognizeCatPage
     "express": "^4.17.1",
     "firebase": "^7.16.0",
     "flatpickr": "^4.5.1",

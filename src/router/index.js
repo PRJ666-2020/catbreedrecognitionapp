@@ -2,30 +2,22 @@ import Vue from "vue";
 import Router from "vue-router";
 import AppHeader from "../layout/AppHeader";
 import AppFooter from "../layout/AppFooter";
-<<<<<<< HEAD
-import Components from "../views/Components.vue";
-=======
->>>>>>> RecognizeCatPage
 import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
 import Profile from "../views/Profile.vue";
 import Resetpassword from "../views/Resetpassword.vue";
-<<<<<<< HEAD
 import PostDetail from "../views/PostDetail.vue"
 import recognizebreed from "../views/recognizebreed.vue"
 import HomePage from "../views/Homepage.vue"
-
-=======
->>>>>>> RecognizeCatPage
+import BreedList from "../views/BreedList.vue"
 import { auth } from '../firebase'
-import Home from "../views/Home"
+import Home from "../views/Home.vue"
 
 Vue.use(Router)
 
 const routes = [
   {
     path: '/',
-<<<<<<< HEAD
     redirect: '/home'
   },
   {
@@ -33,13 +25,16 @@ const routes = [
     name: 'HomePage',
     components: {
       header: AppHeader,
-      default: HomePage,
-=======
-    name: 'Main',
+      default: Home,
+      footer: AppFooter
+    }
+  },
+  {
+    path: '/breedlist',
+    name: 'BreedList',
     components: {
       header: AppHeader,
-      default: Home,
->>>>>>> RecognizeCatPage
+      default: BreedList,
       footer: AppFooter
     }
   },
@@ -81,7 +76,6 @@ const routes = [
       default: Resetpassword,
       footer: AppFooter
     }
-<<<<<<< HEAD
   },
   {
     path: "/recognize",
@@ -93,9 +87,6 @@ const routes = [
     }
   },
 
-=======
-  }
->>>>>>> RecognizeCatPage
 ]
 
 const router = new Router({

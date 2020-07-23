@@ -55,17 +55,11 @@ const store = new Vuex.Store({
       if (router.currentRoute.path === '/login') {
         router.push('/profile')
       }
-<<<<<<< HEAD
       if (router.currentRoute.path === '/register') {
         router.push('/profile')
       }
 
 
-=======
-      else if (router.currentRoute.path === '/register') {
-        router.push('/profile')
-      }
->>>>>>> RecognizeCatPage
     },
 
     async signup({ dispatch }, form) {
@@ -140,19 +134,7 @@ const store = new Vuex.Store({
       })
     },
     async createPost({ state, commit }, post) {
-      // let images = [];
-      // post.picture.forEach(picture => {
-      //   var imagesRef = fb.store.ref(fb.auth.currentUser.uid + '/' + picture.name);
-      //   var uploadTask = imagesRef.put(picture);
-      //   uploadTask.on('state_changed', (snapshot) => {
 
-      //   }, (error) => {
-      //   }, () => {
-      //     uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
-      //       images.push(downloadURL)
-      //     })
-      //   });
-      // })
       await fb.postsCollection.add({
         createdOn: new Date(),
         title: post.title,

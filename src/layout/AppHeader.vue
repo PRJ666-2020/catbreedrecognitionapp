@@ -21,11 +21,12 @@
                 <base-dropdown tag="li" class="nav-item">
                     <a slot="title" class="nav-link" data-toggle="dropdown" role="button">
                         <i class="ni ni-ui-04 d-lg-none"></i>
-                       <router-link to="/home" class="nav-link-inner--text">Breed</router-link>
+                       <router-link to="/breedlist" class="nav-link-inner--text">Breed</router-link>
                     </a>
+
                     <router-link to="/recognize" class="dropdown-item" >Recognize Breed</router-link>
                     <div class="dropdown-menu-inner">
-                         <router-link to="/home" class="nav-link-inner--text"><a href=""
+                         <router-link to="/breedlist" class="nav-link-inner--text"><a href=""
                            class="media d-flex align-items-center">
                             <div >   
                                 <img v-lazy="'img/theme/shorthair.jpg'" alt="Raised circle image"
@@ -36,7 +37,7 @@
                                 
                             </div>
                         </a></router-link>
-                        <router-link to="/home" class="nav-link-inner--text"><a href=""
+                        <router-link to="/breedlist" class="nav-link-inner--text"><a href=""
                            class="media d-flex align-items-center">
                             <div >
                                 <img v-lazy="'img/theme/bengal.jpg'" alt="Raised circle image"
@@ -46,7 +47,7 @@
                                 <h5 class="heading text-warning mb-md-1">Bengal</h5>
                             </div>
                         </a></router-link>
-                        <router-link to="/home" class="nav-link-inner--text"><a href=""
+                        <router-link to="/breedlist" class="nav-link-inner--text"><a href=""
                            class="media d-flex align-items-center">
                             <div >   
                                 <img v-lazy="'img/theme/bombay.jpg'" alt="Raised circle image"
@@ -57,7 +58,7 @@
                                 
                             </div>
                         </a></router-link>
-                        <router-link to="/home" class="nav-link-inner--text"><a href=""
+                        <router-link to="/breedlist" class="nav-link-inner--text"><a href=""
                            class="media d-flex align-items-center">
                             <div >
                                 <img v-lazy="'img/theme/calico.jpg'" alt="Raised circle image"
@@ -67,7 +68,7 @@
                                 <h5 class="heading text-warning mb-md-1">Calico</h5>
                             </div>
                         </a></router-link>
-                        <router-link to="/home" class="nav-link-inner--text"><a href=""
+                        <router-link to="/breedlist" class="nav-link-inner--text"><a href=""
                            class="media d-flex align-items-center">
                             <div >   
                                 <img v-lazy="'img/theme/domestic_longhair.jpg'" alt="Raised circle image"
@@ -78,7 +79,7 @@
                                 
                             </div>
                         </a></router-link>
-                        <router-link to="/home" class="nav-link-inner--text"><a href=""
+                        <router-link to="/breedlist" class="nav-link-inner--text"><a href=""
                            class="media d-flex align-items-center">
                             <div >
                                 <img v-lazy="'img/theme/domestic_short.jpg'" alt="Raised circle image"
@@ -88,7 +89,7 @@
                                 <h5 class="heading text-warning mb-md-1">Domestic Shorthair</h5>
                             </div>
                         </a></router-link>
-                        <router-link to="/home" class="nav-link-inner--text"><a href=""
+                        <router-link to="/breedlist" class="nav-link-inner--text"><a href=""
                            class="media d-flex align-items-center">
                             <div >
                                 <img v-lazy="'img/theme/manx.jpg'" alt="Raised circle image"
@@ -98,7 +99,7 @@
                                 <h5 class="heading text-primary mb-md-1">Manx</h5>
                             </div>
                         </a></router-link>
-                        <router-link to="/home" class="nav-link-inner--text"><a href=""
+                        <router-link to="/breedlist" class="nav-link-inner--text"><a href=""
                            class="media d-flex align-items-center">
                             <div >   
                                 <img v-lazy="'img/theme/dt.jpg'" alt="Raised circle image"
@@ -109,7 +110,7 @@
                                 
                             </div>
                         </a></router-link>
-                        <router-link to="/home" class="nav-link-inner--text"><a href=""
+                        <router-link to="/breedlist" class="nav-link-inner--text"><a href=""
                            class="media d-flex align-items-center">
                             <div >
                                 <img v-lazy="'img/theme/Persian.jpg'" alt="Raised circle image"
@@ -119,7 +120,7 @@
                                 <h5 class="heading text-primary mb-md-1">Persian</h5>
                             </div>
                         </a></router-link>
-                        <router-link to="/home" class="nav-link-inner--text"><a href=""
+                        <router-link to="/breedlist" class="nav-link-inner--text"><a href=""
                            class="media d-flex align-items-center">
                             <div >
                                 <img v-lazy="'img/theme/ragdoll.jpg'" alt="Raised circle image"
