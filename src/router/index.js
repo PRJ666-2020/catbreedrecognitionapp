@@ -3,13 +3,13 @@ import Router from "vue-router";
 import AppHeader from "../layout/AppHeader";
 import AppFooter from "../layout/AppFooter";
 import Components from "../views/Components.vue";
-import Landing from "../views/Landing.vue";
 import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
 import Profile from "../views/Profile.vue";
 import Resetpassword from "../views/Resetpassword.vue";
 import PostDetail from "../views/PostDetail.vue"
 import recognizebreed from "../views/recognizebreed.vue"
+import HomePage from "../views/Homepage.vue"
 
 import { auth } from '../firebase'
 
@@ -18,10 +18,14 @@ Vue.use(Router)
 const routes = [
   {
     path: '/',
-    name: 'Login',
+    redirect: '/home'
+  },
+  {
+    path: '/home',
+    name: 'HomePage',
     components: {
       header: AppHeader,
-      default: Login,
+      default: HomePage,
       footer: AppFooter
     },
   },

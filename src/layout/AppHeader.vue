@@ -17,111 +17,7 @@
       </div>
 
       <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
-        <base-dropdown class="nav-item" menu-classes="dropdown-menu-xl">
-          <a slot="title" href="#" class="nav-link" data-toggle="dropdown" role="button">
-            <i class="ni ni-ui-04 d-lg-none"></i>
-            <span class="nav-link-inner--text">Breed</span>
-          </a>
-          <router-link to="/recognize" class="dropdown-item" >Rcognize Breed</router-link>
-          <router-link to="/login" class="dropdown-item" >Cat Breed list</router-link>
-          <div class="dropdown-menu-inner">
-            <a
-              href="https://demos.creative-tim.com/vue-argon-design-system/documentation/"
-              class="media d-flex align-items-center"
-            >
-              <div>
-                <img
-                  v-lazy="'img/theme/shorthair.jpg'"
-                  alt="Raised circle image"
-                  class="img-fluid rounded-circle shadow-lg"
-                  style="width: 50px;"
-                />
-              </div>
-              <div class="media-body ml-3">
-                <h6 class="heading text-primary mb-md-1">Short hair</h6>
-                <p class="description d-none d-md-inline-block mb-0">Short hair list</p>
-              </div>
-            </a>
-            <a
-              href="https://demos.creative-tim.com/vue-argon-design-system/documentation/"
-              class="media d-flex align-items-center"
-            >
-              <div>
-                <img
-                  v-lazy="'img/theme/longhair.jpg'"
-                  alt="Raised circle image"
-                  class="img-fluid rounded-circle shadow-lg"
-                  style="width: 50px;"
-                />
-              </div>
-              <div class="media-body ml-3">
-                <h5 class="heading text-warning mb-md-1">Long hair</h5>
-                <p class="description d-none d-md-inline-block mb-0">Long hair list</p>
-              </div>
-            </a>
-          </div>
-        </base-dropdown>
-        <base-dropdown tag="li" class="nav-item">
-          <a slot="title" href="#" class="nav-link" data-toggle="dropdown" role="button">
-            <i class="ni ni-collection d-lg-none"></i>
-            <span class="nav-link-inner--text">Account</span>
-          </a>
-          <router-link to="/profile" class="dropdown-item" v-if="loggedIn">Profile</router-link>
-          <router-link to="/login" class="dropdown-item" v-if="!loggedIn">Login</router-link>
-          <router-link to="/register" class="dropdown-item" v-if="!loggedIn">Register</router-link>
-          <li class="dropdown-item" v-if="loggedIn">
-            <a @click="logout()">Logout</a>
-          </li>
-        </base-dropdown>
-      </ul>
-      <ul class="navbar-nav align-items-lg-center ml-lg-auto">
-        <li class="nav-item">
-          <base-input placeholder="Search" addon-left-icon="ni ni-zoom-split-in"></base-input>
-        </li>
-        <li class="nav-item">
-          <a
-            class="nav-link nav-link-icon"
-            href="https://www.facebook.com/creativetim"
-            target="_blank"
-            rel="noopener"
-            data-toggle="tooltip"
-            title="Like us on Facebook"
-          >
-            <i class="fa fa-facebook-square"></i>
-            <span class="nav-link-inner--text d-lg-none">Facebook</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a
-            class="nav-link nav-link-icon"
-            href="https://www.instagram.com/creativetimofficial"
-            target="_blank"
-            rel="noopener"
-            data-toggle="tooltip"
-            title="Follow us on Instagram"
-          >
-            <i class="fa fa-instagram"></i>
-            <span class="nav-link-inner--text d-lg-none">Instagram</span>
-          </a>
-        </li>
-
-        <li class="nav-item">
-          <a
-            class="nav-link nav-link-icon"
-            href="#"
-            target="_blank"
-            rel="noopener"
-            data-toggle="tooltip"
-            title="Star us on Github"
-          >
-            <i class="fa fa-github"></i>
-            <span class="nav-link-inner--text d-lg-none">Github</span>
-          </a>
-        </li>
-      </ul>
-    </base-nav>
-            <base-nav>
-            <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
+        
                 <base-dropdown tag="li" class="nav-item">
                     <a slot="title" class="nav-link" data-toggle="dropdown" role="button">
                         <i class="ni ni-ui-04 d-lg-none"></i>
@@ -234,56 +130,68 @@
                             </div>
                         </a></router-link>                        
                     </div>
-                </base-dropdown>
-                <base-dropdown tag="li" class="nav-item">
-                    <a slot="title" href="#" class="nav-link" data-toggle="dropdown" role="button">
-                        <i class="ni ni-collection d-lg-none"></i>
-                        <span class="nav-link-inner--text">Account</span>
-                    </a>
-                    <router-link to="/profile" class="dropdown-item" >Profile</router-link>
-                    <router-link to="/login" class="dropdown-item" >Login</router-link>
-                    <router-link to="/register" class="dropdown-item" >Register</router-link>
-                </base-dropdown>
-                 <a slot="title" href="#" class="nav-link" data-toggle="dropdown" role="button">
-                        <i class="ni ni-collection d-lg-none"></i>
-                        <router-link to="/posts" class="nav-link-inner--text">Posts</router-link>
-                </a>
-            </ul>
-            <ul class="navbar-nav align-items-lg-center ml-lg-auto">
-                <li class="nav-item">
-                    <base-input placeholder="Search" v-show="showsearchbar"
-                                addon-left-icon="ni ni-zoom-split-in">
-                    </base-input>
-                </li> 
-                <li class="nav-item">
-                    <a class="nav-link nav-link-icon" href="https://www.facebook.com/creativetim" target="_blank" rel="noopener"
-                       data-toggle="tooltip" title="Like us on Facebook">
-                        <i class="fa fa-facebook-square"></i>
-                        <span class="nav-link-inner--text d-lg-none">Facebook</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link nav-link-icon" href="https://www.instagram.com/creativetimofficial"
-                       target="_blank" rel="noopener" data-toggle="tooltip" title="Follow us on Instagram">
-                        <i class="fa fa-instagram"></i>
-                        <span class="nav-link-inner--text d-lg-none">Instagram</span>
-                    </a>
-                </li>
-             
-                <li class="nav-item">
-                    <a class="nav-link nav-link-icon" href="#"
-                       target="_blank" rel="noopener" data-toggle="tooltip" title="Star us on Github">
-                        <i class="fa fa-github"></i>
-                        <span class="nav-link-inner--text d-lg-none">Github</span>
-                    </a>
-                </li>
-                   
-                
-            </ul>
-        </base-nav>
+                </base-dropdown>        
 
+        <base-dropdown tag="li" class="nav-item">
+          <a slot="title" href="#" class="nav-link" data-toggle="dropdown" role="button">
+            <i class="ni ni-collection d-lg-none"></i>
+            <span class="nav-link-inner--text">Account</span>
+          </a>
+          <router-link to="/profile" class="dropdown-item" v-if="loggedIn">Profile</router-link>
+          <router-link to="/login" class="dropdown-item" v-if="!loggedIn">Login</router-link>
+          <router-link to="/register" class="dropdown-item" v-if="!loggedIn">Register</router-link>
+          <li class="dropdown-item" v-if="loggedIn">
+            <a @click="logout()">Logout</a>
+          </li>
+        </base-dropdown>
+      </ul>
+      <ul class="navbar-nav align-items-lg-center ml-lg-auto">
+        <li class="nav-item">
+          <base-input placeholder="Search" addon-left-icon="ni ni-zoom-split-in"></base-input>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link nav-link-icon"
+            href="https://www.facebook.com/creativetim"
+            target="_blank"
+            rel="noopener"
+            data-toggle="tooltip"
+            title="Like us on Facebook"
+          >
+            <i class="fa fa-facebook-square"></i>
+            <span class="nav-link-inner--text d-lg-none">Facebook</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link nav-link-icon"
+            href="https://www.instagram.com/creativetimofficial"
+            target="_blank"
+            rel="noopener"
+            data-toggle="tooltip"
+            title="Follow us on Instagram"
+          >
+            <i class="fa fa-instagram"></i>
+            <span class="nav-link-inner--text d-lg-none">Instagram</span>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a
+            class="nav-link nav-link-icon"
+            href="#"
+            target="_blank"
+            rel="noopener"
+            data-toggle="tooltip"
+            title="Star us on Github"
+          >
+            <i class="fa fa-github"></i>
+            <span class="nav-link-inner--text d-lg-none">Github</span>
+          </a>
+        </li>
+      </ul>
+    </base-nav>
   </header>
-
 </template>
 <script>
 import BaseNav from "@/components/BaseNav";
@@ -310,10 +218,7 @@ export default {
     logout() {
       this.$store.dispatch("logout");
 
-    },
-  data() {
-      return {
-      }
+    }
   }
 };
 </script>

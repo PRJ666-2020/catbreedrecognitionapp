@@ -48,6 +48,8 @@ const store = new Vuex.Store({
 
       // set user profile in state
       commit('setUserProfile', userProfile.data())
+      console.log("THIS fetch function is called")
+      console.log(router.currentRoute.path)
 
       // change route to dashboard
       if (router.currentRoute.path === '/login') {
@@ -59,6 +61,7 @@ const store = new Vuex.Store({
 
 
     },
+
     async signup({ dispatch }, form) {
       // sign user up
       const { user } = await fb.auth.createUserWithEmailAndPassword(form.email, form.password)
@@ -78,20 +81,7 @@ const store = new Vuex.Store({
       commit('setUserProfile', {})
       router.push('/login')
     },
-    async fetchUserProfile({ commit }, user) {
-      // fetch user profile
-      console.log("THIS fetch function is called")
-      const userProfile = await fb.usersCollection.doc(user.uid).get()
 
-      // set user profile in state
-      commit('setUserProfile', userProfile.data())
-      
-      // change route to dashboard
-      console.log(router.currentRoute.path)
-      if (router.currentRoute.path === '/login') {
-        router.push('/profile')
-      }
-    },
     async likePost({ commit }, post) {
       const userId = fb.auth.currentUser.uid
       const docId = `${userId}_${post.id}`
