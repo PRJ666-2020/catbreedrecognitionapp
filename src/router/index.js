@@ -2,13 +2,10 @@ import Vue from "vue";
 import Router from "vue-router";
 import AppHeader from "../layout/AppHeader";
 import AppFooter from "../layout/AppFooter";
-import Components from "../views/Components.vue";
-import Landing from "../views/Landing.vue";
 import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
 import Profile from "../views/Profile.vue";
 import Resetpassword from "../views/Resetpassword.vue";
-import PostDetail from "../views/PostDetail.vue"
 import { auth } from '../firebase'
 
 Vue.use(Router)
@@ -16,12 +13,15 @@ Vue.use(Router)
 const routes = [
   {
     path: '/',
-    name: 'Login',
+    name: 'Main',
     components: {
       header: AppHeader,
-      default: Login,
+      default: Profile,
       footer: AppFooter
     },
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: '/login',
@@ -61,7 +61,7 @@ const routes = [
       default: Resetpassword,
       footer: AppFooter
     }
-  },
+  }
 ]
 
 const router = new Router({

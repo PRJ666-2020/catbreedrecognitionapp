@@ -50,6 +50,9 @@ const store = new Vuex.Store({
       if (router.currentRoute.path === '/login') {
         router.push('/profile')
       }
+      else if (router.currentRoute.path === '/register') {
+        router.push('/profile')
+      }
     },
     async signup({ dispatch }, form) {
       // sign user up
@@ -113,7 +116,42 @@ const store = new Vuex.Store({
           userName: user.username
         })
       })
+    },
+    async updatePost({ dispatch }, post) {
+      const postRef = await fb.postsCollection.doc(post.id).update({
+        title: post.title,
+        content: post.content,
+        createdOn: new Date()
+      })
+    },
+    async createPost({ state, commit }, post) {
+      // let images = [];
+      // post.picture.forEach(picture => {
+      //   var imagesRef = fb.store.ref(fb.auth.currentUser.uid + '/' + picture.name);
+      //   var uploadTask = imagesRef.put(picture);
+      //   uploadTask.on('state_changed', (snapshot) => {
+
+      //   }, (error) => {
+      //   }, () => {
+      //     uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+      //       images.push(downloadURL)
+      //     })
+      //   });
+      // })
+      await fb.postsCollection.add({
+        createdOn: new Date(),
+        title: post.title,
+        content: post.content,
+        // picture: [],
+        userId: fb.auth.currentUser.uid,
+        userName: state.userProfile.username,
+        comments: 0,
+        likes: 0
+      });
     }
+    // async deletePost({ state, commit }, id) {
+    //   db.collection("likesCollection")
+    // }
   }
 })
 

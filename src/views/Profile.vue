@@ -25,23 +25,23 @@
               </div>
               <div class="col-lg-4 order-lg-3 text-lg-right align-self-lg-center">
                 <div class="card-profile-actions py-4 mt-lg-0">
-                  <!-- <base-button type="default" size="sm" class="mr-4">Message</base-button> -->
-                  <!-- <base-button type="info" size="sm" class="mr-4">Follow</base-button> -->
+                  <base-button
+                    type="primary"
+                    size="sm"
+                    class="mr-4"
+                    @click="toggleCreatePostModal()"
+                  >Create Post</base-button>
                   <base-button
                     type="default"
                     size="sm"
                     class="float-right"
                     @click="toggleUpdateProfileModal()"
-                  >Edit</base-button>
+                  >Edit Profile</base-button>
                 </div>
               </div>
 
               <div class="col-lg-4 order-lg-1">
                 <div class="card-profile-stats d-flex justify-content-center">
-                  <!-- <div>
-                    <span class="heading">2</span>
-                    <span class="description">Cat(s)</span>
-                  </div>-->
                   <div>
                     <span class="heading">{{posts.length}}</span>
                     <span class="description">Posts</span>
@@ -53,27 +53,29 @@
             <div class="text-center mt-5">
               <h3>{{ userProfile.username }}</h3>
             </div>
+
             <div class="mt-5 py-5 border-top text-center">
+              <div class="text-center mt-5">
+                <h3>Your posts</h3>
+              </div>
+
               <div class="row justify-content-center">
                 <div class="col-lg-9">
                   <div v-for="post in posts" :key="post.id">
                     <div v-if="post.userName == userProfile.username">
                       <card shadow class="shadow-lg--hover mt-5">
-                        <div class="d-flex px-3">
-                          <div class="pl-4">
-                            <h5 class="title text-warning">{{ post.title }}</h5>
-                            <p>{{ post.content }}</p>
-                            <base-button
-                              @click="likePost(post.id, post.likes)"
-                              class="text-warning"
-                            >{{ post.likes }} likes</base-button>
-                            <base-button
-                              @click="toggleCommentModal(post)"
-                              class="text-warning"
-                            >Comment</base-button>
-                            <base-button @click="viewPost(post)" class="text-warning">Show more</base-button>
-                          </div>
-                        </div>
+                        <!-- <div class="d-flex px-3"> -->
+                        <!-- <div class="pl-4"> -->
+                        <h5 class="title text-warning">{{ post.title }}</h5>
+                        <!-- </div> -->
+                        <!-- </div> -->
+                        <p>{{ post.content | trimLength }}</p>
+                        <base-button
+                          @click="likePost(post.id, post.likes)"
+                          class="text-warning"
+                        >{{ post.likes }} likes</base-button>
+                        <base-button @click="toggleEditPostModal(post)" class="text-warning">Edit</base-button>
+                        <base-button @click="viewPost(post)" class="text-warning">Show more</base-button>
                       </card>
                     </div>
                   </div>
@@ -90,25 +92,34 @@
         <h4>{{ fullPost.title }}</h4>
         <small>Posted {{fullPost.createdOn | formatDate}}</small>
       </div>
+      <div v-for="picture in fullPost.picture" :key="picture.id">
+        <img :src="picture" alt />
+      </div>
       <h5>{{ fullPost.content }}</h5>
       <div v-show="postComments.length" class="modal-body">
-        <template v-for="comment in postComments">
-          <p :key="comment.id + '-userName'">{{ comment.userName }}</p>
-          <small :key="comment.id + '-createdOn'">{{ comment.createdOn | formatDate }}</small>
-          <p :key="comment.id + '-content'">{{ comment.content }}</p>
-        </template>
+        <div v-for="comment in postComments" :key="comment.id">
+          <hr />
+          <p>{{ comment.userName }}</p>
+          <small>{{ comment.createdOn | formatDate }}</small>
+          <p>{{ comment.content }}</p>
+        </div>
       </div>
       <template slot="footer">
         <base-button
           type="link"
           class="ml-auto"
-          @click="likePost(fullPost.id, fullPost.likes) || closePostModal()"
+          @click="likePost(fullPost.id, fullPost.likes) | closePostModal()"
         >{{ fullPost.likes }} likes</base-button>
         <base-button
           type="link"
           class="ml-auto"
-          @click="closePostModal() || toggleCommentModal(fullPost)"
+          @click="closePostModal() | toggleCommentModal(fullPost)"
         >Comment</base-button>
+        <!-- <base-button
+          type="link"
+          class="ml-auto"
+          @click="closePostModal() | deletePostModal(fullPost.id)"
+        >Delete</base-button>-->
         <base-button type="link" class="ml-auto" @click="closePostModal()">Close</base-button>
       </template>
     </modal>
@@ -143,11 +154,84 @@
         v-model.trim="username"
         type="text"
         :placeholder="userProfile.username"
-        id="username"
+        id="username1"
       />
       <template slot="footer">
-        <base-button type="link" class="ml-auto" @click="updateProfile()">Save</base-button>
+        <base-button
+          type="link"
+          class="ml-auto"
+          @click="updateProfile() | toggleUpdateProfileModal()"
+          :disabled="username == ''"
+        >Save</base-button>
         <base-button type="link" class="ml-auto" @click="toggleUpdateProfileModal()">Close</base-button>
+      </template>
+    </modal>
+
+    <modal :show.sync="showEditPostModal" :showClose="false">
+      <template slot="header">Edit your post</template>
+      <label for="username2">Title</label>
+      <base-input
+        v-model.trim="editedTitle"
+        type="text"
+        :placeholder="selectedPost.title"
+        id="username2"
+      />
+      <label for="editedContent">Content</label>
+      <textarea
+        class="form-control form-control-alternative"
+        name="name"
+        rows="4"
+        cols="110"
+        :placeholder="selectedPost.content"
+        v-model.trim="editedContent"
+      ></textarea>
+      <!-- <div class="col-md-6">
+                  <label for="picture">Pictures</label>
+                  <input type="file" @change="addImage" />
+                  <hr />
+                  <div v-for="picture in createdPost.picture" :key="picture.id">
+                    <img :src="picture" alt width="80px" />
+                    <hr />
+                  </div>
+      </div>-->
+      <template slot="footer">
+        <base-button
+          type="link"
+          class="ml-auto"
+          @click="updatePost(selectedPost.id, editedTitle, editedContent) | toggleEditPostModal()"
+          :disabled="editedContent == '' || editedTitle == ''"
+        >Save</base-button>
+        <base-button type="link" class="ml-auto" @click="toggleEditPostModal()">Close</base-button>
+      </template>
+    </modal>
+
+    <modal :show.sync="showCreatePostModal" :showClose="false">
+      <template slot="header">Create a post</template>
+      <label for="title2">Title</label>
+      <base-input
+        v-model.trim="createdPost.title"
+        type="text"
+        placeholder="Your title"
+        id="title2"
+      />
+      <label for="content2">Content</label>
+      <textarea
+        class="form-control form-control-alternative"
+        rows="4"
+        cols="110"
+        placeholder="Your content"
+        v-model.trim="createdPost.content"
+        id="content2"
+      ></textarea>
+
+      <template slot="footer">
+        <base-button
+          type="link"
+          class="ml-auto"
+          @click="createPost()"
+          :disabled="createdPost.content == '' || createdPost.title == ''"
+        >Create</base-button>
+        <base-button type="link" class="ml-auto" @click="toggleCreatePostModal()">Close</base-button>
       </template>
     </modal>
   </div>
@@ -171,14 +255,23 @@ export default {
         title: "",
         content: ""
       },
+      createdPost: {
+        content: "",
+        title: ""
+        // picture: []
+      },
       showEditProfileModal: false,
+      showEditPostModal: false,
       showCommentModal: false,
+      showCreatePostModal: false,
       selectedPost: {},
       showPostModal: false,
       fullPost: {},
       postComments: [],
       comment: "",
-      username: ""
+      username: "",
+      editedContent: "",
+      editedTitle: ""
     };
   },
   computed: {
@@ -192,13 +285,11 @@ export default {
       const docs = await commentsCollection
         .where("postId", "==", post.id)
         .get();
-
       docs.forEach(doc => {
         let comment = doc.data();
         comment.id = doc.id;
         this.postComments.push(comment);
       });
-
       this.fullPost = post;
       this.showPostModal = true;
     },
@@ -207,7 +298,6 @@ export default {
       this.showPostModal = false;
     },
     async addComment() {
-      // create comment
       await commentsCollection.add({
         createdOn: new Date(),
         content: this.comment,
@@ -215,16 +305,11 @@ export default {
         userId: auth.currentUser.uid,
         userName: this.$store.state.userProfile.username
       });
-
-      // update comment count on post
       await postsCollection.doc(this.selectedPost.id).update({
         comments: parseInt(this.selectedPost.comments) + 1
       });
-
-      // close modal
       this.comment = "";
       this.showCommentModal = !this.showCommentModal;
-      // toggleCommentModal();
     },
     toggleCommentModal(post) {
       this.showCommentModal = !this.showCommentModal;
@@ -235,16 +320,54 @@ export default {
       }
       this.comment = "";
     },
+    toggleEditPostModal(post) {
+      this.showEditPostModal = !this.showEditPostModal;
+      if (this.showEditPostModal) {
+        this.selectedPost = post;
+      } else {
+        this.selectedPost = {};
+        this.editedContent = "";
+        this.editedTitle = "";
+      }
+    },
     toggleUpdateProfileModal() {
       this.showEditProfileModal = !this.showEditProfileModal;
+      this.username = "";
     },
-    updateProfile() {
+    async updateProfile() {
       this.$store.dispatch("updateProfile", {
         username:
           this.username !== "" ? this.username : this.userProfile.username
       });
       this.username = "";
+    },
+    async updatePost(id, title, content) {
+      this.$store.dispatch("updatePost", { id, title, content });
+      this.editedTitle = "";
+      this.editedContent = "";
+    },
+    toggleCreatePostModal() {
+      this.showCreatePostModal = !this.showCreatePostModal;
+      this.createdPost.title = "";
+      this.createdPost.content = "";
+      this.createdPost.picture = [];
+    },
+    async createPost() {
+      this.$store.dispatch("createPost", {
+        content: this.createdPost.content,
+        title: this.createdPost.title,
+        picture: this.createdPost.picture
+      });
+      this.createdPost.content = "";
+      this.createdPost.title = "";
+      this.createdPost.picture = [];
     }
+    // async deletePost(id) {
+    //   this.$store.dispatch("deletePost", id);
+    // }
+    // addImage(image) {
+    //   this.createdPost.picture.push(image.target.files[0]);
+    // }
   },
   filters: {
     formatDate(val) {
@@ -259,7 +382,7 @@ export default {
       if (val.length < 200) {
         return val;
       }
-      return `${val.substring(0, 200)}...`;
+      return `${val.substring(0, 150)}...`;
     }
   }
 };
