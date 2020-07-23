@@ -2,6 +2,8 @@
   <div>
     <div class="position-relative">
       <!-- shape Hero -->
+      
+      <!--for loop section-->
       <section class="section-shaped my-0">
         <div class="shape shape-style-1 shape-default shape-skew">
           <span></span>
@@ -51,6 +53,8 @@
           </div>
         </div>
       </section>
+      <!--for loop section-->
+      
       <section class="section-shaped my-0">
         <div class="shape shape-style-1 shape-default shape-skew">
           <span></span>

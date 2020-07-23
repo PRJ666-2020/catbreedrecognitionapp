@@ -120,7 +120,170 @@
         </li>
       </ul>
     </base-nav>
+            <base-nav>
+            <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
+                <base-dropdown tag="li" class="nav-item">
+                    <a slot="title" class="nav-link" data-toggle="dropdown" role="button">
+                        <i class="ni ni-ui-04 d-lg-none"></i>
+                       <router-link to="/home" class="nav-link-inner--text">Breed</router-link>
+                    </a>
+                    <router-link to="/recognize" class="dropdown-item" >Recognize Breed</router-link>
+                    <div class="dropdown-menu-inner">
+                         <router-link to="/home" class="nav-link-inner--text"><a href=""
+                           class="media d-flex align-items-center">
+                            <div >   
+                                <img v-lazy="'img/theme/shorthair.jpg'" alt="Raised circle image"
+                                class="img-fluid rounded-circle shadow-lg" style="width: 50px;">                             
+                            </div>
+                            <div class="media-body ml-3">
+                                <h5 class="heading text-primary mb-md-1">American Shorthair</h5>
+                                
+                            </div>
+                        </a></router-link>
+                        <router-link to="/home" class="nav-link-inner--text"><a href=""
+                           class="media d-flex align-items-center">
+                            <div >
+                                <img v-lazy="'img/theme/bengal.jpg'" alt="Raised circle image"
+                                class="img-fluid rounded-circle shadow-lg" style="width: 50px;"> 
+                            </div>
+                            <div class="media-body ml-3">
+                                <h5 class="heading text-warning mb-md-1">Bengal</h5>
+                            </div>
+                        </a></router-link>
+                        <router-link to="/home" class="nav-link-inner--text"><a href=""
+                           class="media d-flex align-items-center">
+                            <div >   
+                                <img v-lazy="'img/theme/bombay.jpg'" alt="Raised circle image"
+                                class="img-fluid rounded-circle shadow-lg" style="width: 50px;">                             
+                            </div>
+                            <div class="media-body ml-3">
+                                <h5 class="heading text-primary mb-md-1">Bombay</h5>
+                                
+                            </div>
+                        </a></router-link>
+                        <router-link to="/home" class="nav-link-inner--text"><a href=""
+                           class="media d-flex align-items-center">
+                            <div >
+                                <img v-lazy="'img/theme/calico.jpg'" alt="Raised circle image"
+                                class="img-fluid rounded-circle shadow-lg" style="width: 50px;"> 
+                            </div>
+                            <div class="media-body ml-3">
+                                <h5 class="heading text-warning mb-md-1">Calico</h5>
+                            </div>
+                        </a></router-link>
+                        <router-link to="/home" class="nav-link-inner--text"><a href=""
+                           class="media d-flex align-items-center">
+                            <div >   
+                                <img v-lazy="'img/theme/domestic_longhair.jpg'" alt="Raised circle image"
+                                class="img-fluid rounded-circle shadow-lg" style="width: 50px;">                             
+                            </div>
+                            <div class="media-body ml-3">
+                                <h5 class="heading text-primary mb-md-1">Domestic Longhair</h5>
+                                
+                            </div>
+                        </a></router-link>
+                        <router-link to="/home" class="nav-link-inner--text"><a href=""
+                           class="media d-flex align-items-center">
+                            <div >
+                                <img v-lazy="'img/theme/domestic_short.jpg'" alt="Raised circle image"
+                                class="img-fluid rounded-circle shadow-lg" style="width: 50px;"> 
+                            </div>
+                            <div class="media-body ml-3">
+                                <h5 class="heading text-warning mb-md-1">Domestic Shorthair</h5>
+                            </div>
+                        </a></router-link>
+                        <router-link to="/home" class="nav-link-inner--text"><a href=""
+                           class="media d-flex align-items-center">
+                            <div >
+                                <img v-lazy="'img/theme/manx.jpg'" alt="Raised circle image"
+                                class="img-fluid rounded-circle shadow-lg" style="width: 50px;"> 
+                            </div>
+                            <div class="media-body ml-3">
+                                <h5 class="heading text-primary mb-md-1">Manx</h5>
+                            </div>
+                        </a></router-link>
+                        <router-link to="/home" class="nav-link-inner--text"><a href=""
+                           class="media d-flex align-items-center">
+                            <div >   
+                                <img v-lazy="'img/theme/dt.jpg'" alt="Raised circle image"
+                                class="img-fluid rounded-circle shadow-lg" style="width: 50px;">                             
+                            </div>
+                            <div class="media-body ml-3">
+                                <h6 class="heading text-warning mb-md-1">Dilute Tortoise</h6>
+                                
+                            </div>
+                        </a></router-link>
+                        <router-link to="/home" class="nav-link-inner--text"><a href=""
+                           class="media d-flex align-items-center">
+                            <div >
+                                <img v-lazy="'img/theme/Persian.jpg'" alt="Raised circle image"
+                                class="img-fluid rounded-circle shadow-lg" style="width: 50px;"> 
+                            </div>
+                            <div class="media-body ml-3">
+                                <h5 class="heading text-primary mb-md-1">Persian</h5>
+                            </div>
+                        </a></router-link>
+                        <router-link to="/home" class="nav-link-inner--text"><a href=""
+                           class="media d-flex align-items-center">
+                            <div >
+                                <img v-lazy="'img/theme/ragdoll.jpg'" alt="Raised circle image"
+                                class="img-fluid rounded-circle shadow-lg" style="width: 50px;"> 
+                            </div>
+                            <div class="media-body ml-3">
+                                <h5 class="heading text-warning mb-md-1">Ragdoll</h5>
+                            </div>
+                        </a></router-link>                        
+                    </div>
+                </base-dropdown>
+                <base-dropdown tag="li" class="nav-item">
+                    <a slot="title" href="#" class="nav-link" data-toggle="dropdown" role="button">
+                        <i class="ni ni-collection d-lg-none"></i>
+                        <span class="nav-link-inner--text">Account</span>
+                    </a>
+                    <router-link to="/profile" class="dropdown-item" >Profile</router-link>
+                    <router-link to="/login" class="dropdown-item" >Login</router-link>
+                    <router-link to="/register" class="dropdown-item" >Register</router-link>
+                </base-dropdown>
+                 <a slot="title" href="#" class="nav-link" data-toggle="dropdown" role="button">
+                        <i class="ni ni-collection d-lg-none"></i>
+                        <router-link to="/posts" class="nav-link-inner--text">Posts</router-link>
+                </a>
+            </ul>
+            <ul class="navbar-nav align-items-lg-center ml-lg-auto">
+                <li class="nav-item">
+                    <base-input placeholder="Search" v-show="showsearchbar"
+                                addon-left-icon="ni ni-zoom-split-in">
+                    </base-input>
+                </li> 
+                <li class="nav-item">
+                    <a class="nav-link nav-link-icon" href="https://www.facebook.com/creativetim" target="_blank" rel="noopener"
+                       data-toggle="tooltip" title="Like us on Facebook">
+                        <i class="fa fa-facebook-square"></i>
+                        <span class="nav-link-inner--text d-lg-none">Facebook</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav-link-icon" href="https://www.instagram.com/creativetimofficial"
+                       target="_blank" rel="noopener" data-toggle="tooltip" title="Follow us on Instagram">
+                        <i class="fa fa-instagram"></i>
+                        <span class="nav-link-inner--text d-lg-none">Instagram</span>
+                    </a>
+                </li>
+             
+                <li class="nav-item">
+                    <a class="nav-link nav-link-icon" href="#"
+                       target="_blank" rel="noopener" data-toggle="tooltip" title="Star us on Github">
+                        <i class="fa fa-github"></i>
+                        <span class="nav-link-inner--text d-lg-none">Github</span>
+                    </a>
+                </li>
+                   
+                
+            </ul>
+        </base-nav>
+
   </header>
+
 </template>
 <script>
 import BaseNav from "@/components/BaseNav";
@@ -147,7 +310,10 @@ export default {
     logout() {
       this.$store.dispatch("logout");
 
-    }
+    },
+  data() {
+      return {
+      }
   }
 };
 </script>
