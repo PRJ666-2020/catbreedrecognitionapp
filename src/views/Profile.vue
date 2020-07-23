@@ -43,7 +43,7 @@
               <div class="col-lg-4 order-lg-1">
                 <div class="card-profile-stats d-flex justify-content-center">
                   <div>
-                    <span class="heading">{{posts.length}}</span>
+                    <span class="heading">{{posts.filter(post => post.userId == isUser).length}}</span>
                     <span class="description">Posts</span>
                   </div>
                 </div>
@@ -62,7 +62,7 @@
               <div class="row justify-content-center">
                 <div class="col-lg-9">
                   <div v-for="post in posts" :key="post.id">
-                    <div v-if="post.userName == userProfile.username">
+                    <div v-if="post.userId == isUser">
                       <card shadow class="shadow-lg--hover mt-5">
                         <!-- <div class="d-flex px-3"> -->
                         <!-- <div class="pl-4"> -->
@@ -289,6 +289,9 @@ export default {
   },
   computed: {
     ...mapState(["userProfile", "posts"]),
+    isUser() {
+      return fb.auth.currentUser.uid;
+    },
   },
   methods: {
     likePost(id, likesCount) {

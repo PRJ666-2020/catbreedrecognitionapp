@@ -7,6 +7,7 @@ import Register from "../views/Register.vue";
 import Profile from "../views/Profile.vue";
 import Resetpassword from "../views/Resetpassword.vue";
 import { auth } from '../firebase'
+import Home from "../views/Home"
 
 Vue.use(Router)
 
@@ -16,11 +17,8 @@ const routes = [
     name: 'Main',
     components: {
       header: AppHeader,
-      default: Profile,
+      default: Home,
       footer: AppFooter
-    },
-    meta: {
-      requiresAuth: true
     }
   },
   {
