@@ -64,7 +64,8 @@
             <i class="ni ni-collection d-lg-none"></i>
             <span class="nav-link-inner--text">Account</span>
           </a>
-          <router-link to="/profile" class="dropdown-item" v-if="loggedIn">Profile</router-link>
+          <router-link to="/profile" class="dropdown-item" v-if="loggedIn">Your profile</router-link>
+          <router-link to="/catprofile" class="dropdown-item" v-if="loggedIn">See your cats</router-link>
           <router-link to="/login" class="dropdown-item" v-if="!loggedIn">Login</router-link>
           <router-link to="/register" class="dropdown-item" v-if="!loggedIn">Register</router-link>
           <li class="dropdown-item" v-if="loggedIn">
@@ -132,13 +133,13 @@ export default {
     BaseNav,
     CloseButton,
     BaseDropdown,
-    Images
+    Images,
   },
   computed: {
     ...mapState(["userProfile"]),
     loggedIn() {
       return Object.keys(this.userProfile).length > 0;
-    }
+    },
   },
   // data() {
   //   return {
@@ -167,8 +168,8 @@ export default {
   methods: {
     logout() {
       this.$store.dispatch("logout");
-    }
-  }
+    },
+  },
 };
 </script>
 <style>

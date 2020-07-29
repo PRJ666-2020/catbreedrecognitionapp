@@ -8,6 +8,7 @@ import Profile from "../views/Profile.vue";
 import Resetpassword from "../views/Resetpassword.vue";
 import { auth } from '../firebase'
 import Home from "../views/Home"
+import CatProfile from "../views/CatProfile.vue"
 
 Vue.use(Router)
 
@@ -45,6 +46,18 @@ const routes = [
     components: {
       header: AppHeader,
       default: Profile,
+      footer: AppFooter
+    },
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: "/catprofile",
+    name: "CatProfile",
+    components: {
+      header: AppHeader,
+      default: CatProfile,
       footer: AppFooter
     },
     meta: {

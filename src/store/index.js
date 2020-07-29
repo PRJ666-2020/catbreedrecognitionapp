@@ -2,12 +2,12 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import * as fb from '../firebase'
 import router from '../router/index'
+import { auth } from 'firebase'
 
 Vue.use(Vuex)
 
 fb.postsCollection.orderBy('createdOn', 'desc').onSnapshot(snapshot => {
   let postsArray = []
-
   snapshot.forEach(doc => {
     let post = doc.data()
     post.id = doc.id
@@ -18,10 +18,23 @@ fb.postsCollection.orderBy('createdOn', 'desc').onSnapshot(snapshot => {
   store.commit('setPosts', postsArray)
 })
 
+fb.catsCollection.get().then(function (querySnapshot) {
+  let catsArray = []
+  querySnapshot.forEach(function (doc) {
+    if (doc.data().owner == fb.auth.currentUser.uid) {
+      let cat = doc.data()
+      cat.id = doc.id
+      catsArray.push(cat)
+    }
+  });
+  store.commit('setCats', catsArray)
+});
+
 const store = new Vuex.Store({
   state: {
     userProfile: {},
     posts: [],
+    cats: [],
     error: ""
   },
   mutations: {
@@ -30,6 +43,9 @@ const store = new Vuex.Store({
     },
     setPosts(state, val) {
       state.posts = val
+    },
+    setCats(state, val) {
+      state.cats = val
     },
     setError(state, val) {
       state.error = val;
@@ -150,6 +166,15 @@ const store = new Vuex.Store({
         comments: 0,
         likes: 0
       });
+    },
+    async createCat({ state, commit }, cat) {
+      await fb.catsCollection.add({
+        name: cat.name,
+        birth: cat.birth,
+        gender: cat.gender,
+        description: cat.description,
+        owner: fb.auth.currentUser.uid
+      })
     },
     async deletePost({ state, commit }, id) {
       const userId = fb.auth.currentUser.uid

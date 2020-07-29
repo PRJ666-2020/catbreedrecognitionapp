@@ -25,57 +25,38 @@
               </div>
               <div class="col-lg-4 order-lg-3 text-lg-right align-self-lg-center">
                 <div class="card-profile-actions py-4 mt-lg-0">
-                  <base-button
-                    type="primary"
-                    size="sm"
-                    class="mr-4"
-                    @click="toggleCreateCatModal()"
-                  >Create Cat Profile</base-button>
-                  <base-button
-                    type="default"
-                    size="sm"
-                    class="float-right"
-                    @click="toggleUpdateProfileModal()"
-                  >Edit Profile</base-button>
+                  <base-button type="default" size="sm" class="mr-4">Edit</base-button>
+                  <!--@click="toggleUpdateProfileModal()"-->
+                  <base-button type="primary" size="sm" class="float-right">Upload picture</base-button>
+                  <!--Upload cat profile image-->
                 </div>
               </div>
 
               <div class="col-lg-4 order-lg-1">
                 <div class="card-profile-stats d-flex justify-content-center">
                   <div>
-                    <span class="heading">{{posts.filter(post => post.userId == isUser).length}}</span>
-                    <span class="description">Posts</span>
-                  </div>
-                  <div>
-                    <base-button
-                      type="primary"
-                      size="sm"
-                      class="mr-4"
-                      @click="toggleCreatePostModal()"
-                    >Create Post</base-button>
+                    <span class="heading">Owner</span>
+                    <span class="description">{{userProfile.username}}</span>
                   </div>
                 </div>
               </div>
             </div>
 
             <div class="text-center mt-5">
-              <h3>{{ userProfile.username }}</h3>
+              <h3>{{ cats[0].name }}</h3>
             </div>
-            <div class="mt-5 py-5 border-top text-center">
-              <div class="text-center mt-5">
-                <h3>Your posts</h3>
-              </div>
 
-              <div class="row justify-content-center">
+            <div class="mt-5 py-5 border-top">
+              <h5>Date of birth: {{ cats[0].birth}}</h5>
+              <h5>Gender: {{ cats[0].gender }}</h5>
+
+              <div class="row justify-content-center text-center">
                 <div class="col-lg-9">
-                  <div v-for="post in posts" :key="post.id">
+                  <!-- <div v-for="post in posts" :key="post.id">
                     <div v-if="post.userId == isUser">
                       <card shadow class="shadow-lg--hover mt-5">
-                        <!-- <div class="d-flex px-3"> -->
-                        <!-- <div class="pl-4"> -->
                         <h5 class="title text-warning">{{ post.title }}</h5>
-                        <!-- </div> -->
-                        <!-- </div> -->
+
                         <p>{{ post.content | trimLength }}</p>
                         <base-button
                           @click="likePost(post.id, post.likes)"
@@ -85,7 +66,10 @@
                         <base-button @click="viewPost(post)" class="text-warning">Show more</base-button>
                       </card>
                     </div>
-                  </div>
+                  </div>-->
+
+                  <h4>Description</h4>
+                  <h4 class="description">{{ cats[0].description }}</h4>
                 </div>
               </div>
             </div>
@@ -94,7 +78,7 @@
       </div>
     </section>
 
-    <modal :show.sync="showPostModal" :showClose="false">
+    <!-- <modal :show.sync="showPostModal" :showClose="false">
       <div slot="header">
         <h4>{{ fullPost.title }}</h4>
         <small>Posted {{fullPost.createdOn | formatDate}}</small>
@@ -186,36 +170,6 @@
       </template>
     </modal>
 
-    <modal :show.sync="showCreateCatModal" :showClose="false">
-      <template slot="header">Create a cat profile</template>
-      <label for="username">Cat name</label>
-      <base-input v-model.trim="createdCat.name" type="text" placeholder="Cat name" id="catname1" />
-      <b-form-datepicker
-        id="catbirth1"
-        v-model.trim="createdCat.birth"
-        size="sm"
-        placeholder="Cat birthdate"
-        class="mb-2"
-      ></b-form-datepicker>
-      <b-form-select v-model="createdCat.gender" :options="createdCat.genders" class="mb-2"></b-form-select>
-      <b-form-textarea
-        id="catdescription1"
-        v-model="createdCat.description"
-        placeholder="Tell us a little about your cat"
-        rows="3"
-        max-rows="6"
-      ></b-form-textarea>
-      <template slot="footer">
-        <base-button
-          type="link"
-          class="ml-auto"
-          @click="createCat() | toggleCreateCatModal()"
-          :disabled="createdCat.name == '' || createdCat.birth == '' || createdCat.description == '' || createdCat.gender == ''"
-        >Save</base-button>
-        <base-button type="link" class="ml-auto" @click="toggleCreateCatModal()">Close</base-button>
-      </template>
-    </modal>
-
     <modal :show.sync="showEditPostModal" :showClose="false">
       <template slot="header">Edit your post</template>
       <label for="username2">Title</label>
@@ -226,7 +180,6 @@
         id="username2"
       />
       <label for="editedContent">Content</label>
-      <small class="text-warning" v-show="editedContent.length > 300">Post has a 300 character limit</small>
       <textarea
         class="form-control form-control-alternative"
         name="name"
@@ -240,7 +193,7 @@
           type="link"
           class="ml-auto"
           @click="updatePost(selectedPost.id, editedTitle, editedContent) | toggleEditPostModal()"
-          :disabled="editedContent == '' || editedContent.length > 300 || editedTitle == ''"
+          :disabled="editedContent == '' || editedTitle == ''"
         >Save</base-button>
         <base-button type="link" class="ml-auto" @click="toggleEditPostModal()">Close</base-button>
       </template>
@@ -264,11 +217,6 @@
         v-model.trim="createdPost.content"
         id="content2"
       ></textarea>
-      <small
-        class="text-warning"
-        v-show="createdPost.content.length > 300"
-      >Post has a 300 character limit</small>
-      <br />
       <label for="picture">Pictures</label>
       <br />
       <input type="file" @change="addImage" />
@@ -282,22 +230,21 @@
           type="link"
           class="ml-auto"
           @click="createPost() | toggleCreatePostModal()"
-          :disabled="createdPost.content == '' || createdPost.content.length > 300 || createdPost.title == ''"
+          :disabled="createdPost.content == '' || createdPost.title == ''"
         >Create</base-button>
         <base-button type="link" class="ml-auto" @click="toggleCreatePostModal()">Close</base-button>
       </template>
-    </modal>
+    </modal>-->
   </div>
 </template>
 <script>
-import moment from "moment";
+//import moment from "moment";
 import { mapState } from "vuex";
-import { commentsCollection, postsCollection } from "@/firebase";
+//import { commentsCollection, postsCollection } from "@/firebase";
 import Modal from "@/components/Modal";
 import BaseInput from "@/components/BaseInput";
-import { auth } from "@/firebase";
-import * as fb from "@/firebase";
-
+//import { auth } from "@/firebase";
+//import * as fb from "@/firebase";
 export default {
   components: {
     Modal,
@@ -314,17 +261,6 @@ export default {
         title: "",
         picture: [],
       },
-      createdCat: {
-        name: "",
-        description: "",
-        gender: "",
-        birth: "",
-        genders: [
-          { value: "", text: "Choose cat gender" },
-          { value: "Male", text: "Male" },
-          { value: "Female", text: "Female" },
-        ],
-      },
       showEditProfileModal: false,
       showEditPostModal: false,
       showCommentModal: false,
@@ -339,14 +275,10 @@ export default {
       editedTitle: "",
       slide: 0,
       sliding: null,
-      showCreateCatModal: false,
     };
   },
   computed: {
-    ...mapState(["userProfile", "posts"]),
-    isUser() {
-      return fb.auth.currentUser.uid;
-    },
+    ...mapState(["userProfile", "cats"]),
   },
   methods: {
     likePost(id, likesCount) {
@@ -405,13 +337,6 @@ export default {
       this.showEditProfileModal = !this.showEditProfileModal;
       this.username = "";
     },
-    toggleCreateCatModal() {
-      this.createdCat.name = "";
-      this.createdCat.description = "";
-      this.createdCat.gender = "";
-      this.createdCat.birth = "";
-      this.showCreateCatModal = !this.showCreateCatModal;
-    },
     async updateProfile() {
       this.$store.dispatch("updateProfile", {
         username:
@@ -439,14 +364,6 @@ export default {
       this.createdPost.content = "";
       this.createdPost.title = "";
       this.createdPost.picture = [];
-    },
-    async createCat() {
-      this.$store.dispatch("createCat", {
-        name: this.createdCat.name,
-        description: this.createdCat.description,
-        birth: this.createdCat.birth,
-        gender: this.createdCat.gender,
-      });
     },
     async deletePost(id) {
       this.$store.dispatch("deletePost", id);
@@ -478,7 +395,6 @@ export default {
       if (!val) {
         return "-";
       }
-
       let date = val.toDate();
       return moment(date).fromNow();
     },
