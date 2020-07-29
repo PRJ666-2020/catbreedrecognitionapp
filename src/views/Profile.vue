@@ -226,6 +226,11 @@
         v-model.trim="createdPost.content"
         id="content2"
       ></textarea>
+      <small
+        class="text-warning"
+        v-show="createdPost.content.length > 300"
+      >Post has a 300 character limit</small>
+      <br />
       <label for="picture">Pictures</label>
       <br />
       <input type="file" @change="addImage" />
@@ -239,7 +244,7 @@
           type="link"
           class="ml-auto"
           @click="createPost() | toggleCreatePostModal()"
-          :disabled="createdPost.content == '' || createdPost.title == ''"
+          :disabled="createdPost.content == '' || createdPost.content.length > 300 || createdPost.title == ''"
         >Create</base-button>
         <base-button type="link" class="ml-auto" @click="toggleCreatePostModal()">Close</base-button>
       </template>

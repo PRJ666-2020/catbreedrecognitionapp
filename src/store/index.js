@@ -21,7 +21,8 @@ fb.postsCollection.orderBy('createdOn', 'desc').onSnapshot(snapshot => {
 const store = new Vuex.Store({
   state: {
     userProfile: {},
-    posts: []
+    posts: [],
+    error: ""
   },
   mutations: {
     setUserProfile(state, val) {
@@ -29,15 +30,25 @@ const store = new Vuex.Store({
     },
     setPosts(state, val) {
       state.posts = val
+    },
+    setError(state, val) {
+      state.error = val;
     }
   },
   actions: {
-    async login({ dispatch }, form) {
+    async login({ dispatch, commit }, form) {
       // sign user in
       const { user } = await fb.auth.signInWithEmailAndPassword(form.email, form.password)
+      if (user.emailVerified) {
+        // fetch user profile and set in state
+        dispatch('fetchUserProfile', user)
+      }
+      else {
+        await fb.auth.signOut()
+        commit('setUserProfile', {})
+        commit('setError', "Please confirm your email address to log in")
+      }
 
-      // fetch user profile and set in state
-      dispatch('fetchUserProfile', user)
     },
     async fetchUserProfile({ commit }, user) {
       // fetch user profile
@@ -54,17 +65,21 @@ const store = new Vuex.Store({
         router.push('/profile')
       }
     },
-    async signup({ dispatch }, form) {
+    async signup({ dispatch, commit }, form) {
       // sign user up
       const { user } = await fb.auth.createUserWithEmailAndPassword(form.email, form.password)
-
+      user.sendEmailVerification().then(function () {
+        // Email sent.
+      }).catch(function (error) {
+        // An error happened.
+      });
       // create user profile object in userCollections
       await fb.usersCollection.doc(user.uid).set({
         username: form.username
       })
-
-      // fetch user profile and set in state
-      dispatch('fetchUserProfile', user)
+      await fb.auth.signOut()
+      commit('setUserProfile', {})
+      router.push('/login')
     },
     async logout({ commit }) {
       await fb.auth.signOut()
@@ -125,19 +140,6 @@ const store = new Vuex.Store({
       })
     },
     async createPost({ state, commit }, post) {
-      // let images = [];
-      // post.picture.forEach(picture => {
-      //   var imagesRef = fb.store.ref(fb.auth.currentUser.uid + '/' + picture.name);
-      //   var uploadTask = imagesRef.put(picture);
-      //   uploadTask.on('state_changed', (snapshot) => {
-
-      //   }, (error) => {
-      //   }, () => {
-      //     uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
-      //       images.push(downloadURL)
-      //     })
-      //   });
-      // })
       await fb.postsCollection.add({
         createdOn: new Date(),
         title: post.title,
