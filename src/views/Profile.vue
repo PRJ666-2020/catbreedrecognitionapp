@@ -57,7 +57,16 @@
                 </div>
               </div>
             </div>
-
+            <div class="col-lg-4 order-lg-1">
+              Your cats
+              <ul v-for="cat in cats" :key="cat.id" class="list-inline">
+                <li>
+                  <a @click="showCat(cat.id)">
+                    <b-img :src="cat.picture" width="75" height="75" rounded />
+                  </a>
+                </li>
+              </ul>
+            </div>
             <div class="text-center mt-5">
               <h3>{{ userProfile.username }}</h3>
             </div>
@@ -188,7 +197,6 @@
 
     <modal :show.sync="showCreateCatModal" :showClose="false">
       <template slot="header">Create a cat profile</template>
-      <label for="username">Cat name</label>
       <base-input v-model.trim="createdCat.name" type="text" placeholder="Cat name" id="catname1" />
       <b-form-datepicker
         id="catbirth1"
@@ -204,7 +212,13 @@
         placeholder="Tell us a little about your cat"
         rows="3"
         max-rows="6"
+        class="mb-2"
       ></b-form-textarea>
+      <input type="file" @change="addCatImage" />
+      <div class="mt-3">
+        Selected picture:
+        <img :src="createdCat.picture" alt width="250px" />
+      </div>
       <template slot="footer">
         <base-button
           type="link"
@@ -319,6 +333,7 @@ export default {
         description: "",
         gender: "",
         birth: "",
+        picture: "",
         genders: [
           { value: "", text: "Choose cat gender" },
           { value: "Male", text: "Male" },
@@ -343,7 +358,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["userProfile", "posts"]),
+    ...mapState(["userProfile", "posts", "cats"]),
     isUser() {
       return fb.auth.currentUser.uid;
     },
@@ -410,6 +425,7 @@ export default {
       this.createdCat.description = "";
       this.createdCat.gender = "";
       this.createdCat.birth = "";
+      this.createdCat.picture = "";
       this.showCreateCatModal = !this.showCreateCatModal;
     },
     async updateProfile() {
@@ -446,10 +462,14 @@ export default {
         description: this.createdCat.description,
         birth: this.createdCat.birth,
         gender: this.createdCat.gender,
+        picture: this.createdCat.picture,
       });
     },
     async deletePost(id) {
       this.$store.dispatch("deletePost", id);
+    },
+    async showCat(id) {
+      this.$store.dispatch("showCat", id);
     },
     addImage(i) {
       let image = i.target.files[0];
@@ -462,6 +482,21 @@ export default {
         () => {
           uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
             this.createdPost.picture.push(downloadURL);
+          });
+        }
+      );
+    },
+    addCatImage(i) {
+      let image = i.target.files[0];
+      let storeRef = fb.store.ref(fb.auth.currentUser.uid + "/" + image.name);
+      let uploadTask = storeRef.put(image);
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {},
+        (error) => {},
+        () => {
+          uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+            this.createdCat.picture = downloadURL;
           });
         }
       );

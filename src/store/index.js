@@ -35,6 +35,7 @@ const store = new Vuex.Store({
     userProfile: {},
     posts: [],
     cats: [],
+    shownCat: {},
     error: ""
   },
   mutations: {
@@ -46,6 +47,9 @@ const store = new Vuex.Store({
     },
     setCats(state, val) {
       state.cats = val
+    },
+    setShownCat(state, val) {
+      state.shownCat = val
     },
     setError(state, val) {
       state.error = val;
@@ -155,6 +159,12 @@ const store = new Vuex.Store({
         createdOn: new Date()
       })
     },
+    async showCat({ state, commit }, id) {
+      fb.db.collection("cats").doc(id).onSnapshot(snapshot => {
+        commit("setShownCat", snapshot.data())
+        router.push('/catprofile')
+      })
+    },
     async createPost({ state, commit }, post) {
       await fb.postsCollection.add({
         createdOn: new Date(),
@@ -173,6 +183,7 @@ const store = new Vuex.Store({
         birth: cat.birth,
         gender: cat.gender,
         description: cat.description,
+        picture: cat.picture,
         owner: fb.auth.currentUser.uid
       })
     },

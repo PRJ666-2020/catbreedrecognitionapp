@@ -65,7 +65,7 @@
             <span class="nav-link-inner--text">Account</span>
           </a>
           <router-link to="/profile" class="dropdown-item" v-if="loggedIn">Your profile</router-link>
-          <router-link to="/catprofile" class="dropdown-item" v-if="loggedIn">See your cats</router-link>
+          <!-- <router-link to="/catprofile" class="dropdown-item" v-if="loggedIn">See your cats</router-link> -->
           <router-link to="/login" class="dropdown-item" v-if="!loggedIn">Login</router-link>
           <router-link to="/register" class="dropdown-item" v-if="!loggedIn">Register</router-link>
           <li class="dropdown-item" v-if="loggedIn">

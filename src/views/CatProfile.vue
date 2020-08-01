@@ -19,7 +19,7 @@
               <div class="col-lg-3 order-lg-2">
                 <div class="card-profile-image">
                   <a href="#">
-                    <img v-lazy="'img/theme/longhair.jpg'" class="rounded-circle" />
+                    <img v-lazy="shownCat.picture" class="rounded-circle" />
                   </a>
                 </div>
               </div>
@@ -43,12 +43,12 @@
             </div>
 
             <div class="text-center mt-5">
-              <h3>{{ cats[0].name }}</h3>
+              <h3>{{ shownCat.name }}</h3>
             </div>
 
             <div class="mt-5 py-5 border-top">
-              <h5>Date of birth: {{ cats[0].birth}}</h5>
-              <h5>Gender: {{ cats[0].gender }}</h5>
+              <h5>Date of birth: {{ shownCat.birth}}</h5>
+              <h5>Gender: {{ shownCat.gender }}</h5>
 
               <div class="row justify-content-center text-center">
                 <div class="col-lg-9">
@@ -69,7 +69,7 @@
                   </div>-->
 
                   <h4>Description</h4>
-                  <h4 class="description">{{ cats[0].description }}</h4>
+                  <h4 class="description">{{ shownCat.description }}</h4>
                 </div>
               </div>
             </div>
@@ -278,7 +278,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["userProfile", "cats"]),
+    ...mapState(["userProfile", "shownCat"]),
   },
   methods: {
     likePost(id, likesCount) {
