@@ -19,7 +19,12 @@
               <div class="col-lg-3 order-lg-2">
                 <div class="card-profile-image">
                   <a href="#">
-                    <img v-lazy="'img/theme/longhair.jpg'" class="rounded-circle" />
+                    <img
+                      v-if="!userProfile.picture"
+                      v-lazy="'img/theme/longhair.jpg'"
+                      class="rounded-circle"
+                    />
+                    <img v-else v-lazy="userProfile.picture" class="rounded-circle" />
                   </a>
                 </div>
               </div>
@@ -179,17 +184,19 @@
       <template slot="header">Edit your profile</template>
       <label for="username">Username</label>
       <base-input
-        v-model.trim="username"
+        v-model.trim="editedProfile.username"
         type="text"
         :placeholder="userProfile.username"
         id="username1"
       />
+      <input type="file" @change="addProfileImage" />
+      <img v-if="editedProfile.picture" :src="editedProfile.picture" />
       <template slot="footer">
         <base-button
           type="link"
           class="ml-auto"
           @click="updateProfile() | toggleUpdateProfileModal()"
-          :disabled="username == ''"
+          :disabled="editedProfile.username == ''"
         >Save</base-button>
         <base-button type="link" class="ml-auto" @click="toggleUpdateProfileModal()">Close</base-button>
       </template>
@@ -349,7 +356,10 @@ export default {
       fullPost: {},
       postComments: [],
       comment: "",
-      username: "",
+      editedProfile: {
+        username: "",
+        picture: "",
+      },
       editedContent: "",
       editedTitle: "",
       slide: 0,
@@ -418,7 +428,8 @@ export default {
     },
     toggleUpdateProfileModal() {
       this.showEditProfileModal = !this.showEditProfileModal;
-      this.username = "";
+      this.editedProfile.username = "";
+      this.editedProfile.picture = "";
     },
     toggleCreateCatModal() {
       this.createdCat.name = "";
@@ -431,7 +442,13 @@ export default {
     async updateProfile() {
       this.$store.dispatch("updateProfile", {
         username:
-          this.username !== "" ? this.username : this.userProfile.username,
+          this.editedProfile.username !== ""
+            ? this.editedProfile.username
+            : this.userProfile.username,
+        picture:
+          this.editedProfile.picture !== ""
+            ? this.editedProfile.picture
+            : this.userProfile.picture,
       });
       this.username = "";
     },
@@ -497,6 +514,21 @@ export default {
         () => {
           uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
             this.createdCat.picture = downloadURL;
+          });
+        }
+      );
+    },
+    addProfileImage(i) {
+      let image = i.target.files[0];
+      let storeRef = fb.store.ref(fb.auth.currentUser.uid + "/" + image.name);
+      let uploadTask = storeRef.put(image);
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {},
+        (error) => {},
+        () => {
+          uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+            this.editedProfile.picture = downloadURL;
           });
         }
       );

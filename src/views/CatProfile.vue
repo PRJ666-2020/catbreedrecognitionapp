@@ -19,16 +19,30 @@
               <div class="col-lg-3 order-lg-2">
                 <div class="card-profile-image">
                   <a href="#">
-                    <img v-lazy="shownCat.picture" class="rounded-circle" />
+                    <img
+                      v-if="!shownCat.picture"
+                      v-lazy="'img/theme/longhair.jpg'"
+                      class="rounded-circle"
+                    />
+                    <img v-else v-lazy="shownCat.picture" class="rounded-circle" />
                   </a>
                 </div>
               </div>
               <div class="col-lg-4 order-lg-3 text-lg-right align-self-lg-center">
                 <div class="card-profile-actions py-4 mt-lg-0">
-                  <base-button type="default" size="sm" class="mr-4">Edit</base-button>
-                  <!--@click="toggleUpdateProfileModal()"-->
-                  <base-button type="primary" size="sm" class="float-right">Upload picture</base-button>
-                  <!--Upload cat profile image-->
+                  <base-button
+                    type="default"
+                    @click="toggleUpdateCatModal()"
+                    size="sm"
+                    class="mr-4"
+                  >Edit</base-button>
+
+                  <base-button
+                    type="primary"
+                    @click="deleteCat(shownCat.id)"
+                    size="sm"
+                    class="float-right"
+                  >Delete cat</base-button>
                 </div>
               </div>
 
@@ -77,164 +91,40 @@
         </card>
       </div>
     </section>
-
-    <!-- <modal :show.sync="showPostModal" :showClose="false">
-      <div slot="header">
-        <h4>{{ fullPost.title }}</h4>
-        <small>Posted {{fullPost.createdOn | formatDate}}</small>
-      </div>
-      <b-carousel
-        id="carousel-1"
-        v-model="slide"
-        :interval="4000"
-        controls
-        indicators
-        img-height="480"
-        background="#ababab"
-        style="text-shadow: 1px 1px 2px #333;"
-        @sliding-start="onSlideStart"
-        @sliding-end="onSlideEnd"
-      >
-        <b-carousel-slide v-for="picture in fullPost.picture" :key="picture.id" :img-src="picture" />
-      </b-carousel>
-
-      <h5>{{ fullPost.content }}</h5>
-      <div v-show="postComments.length" class="modal-body">
-        <div v-for="comment in postComments" :key="comment.id">
-          <hr />
-          <p>{{ comment.userName }}</p>
-          <small>{{ comment.createdOn | formatDate }}</small>
-          <p>{{ comment.content }}</p>
-        </div>
+    <modal :show.sync="showUpdateCatModal" :showClose="false">
+      <template slot="header">Update cat profile</template>
+      <base-input v-model.trim="editedCat.name" type="text" placeholder="Cat name" id="catname1" />
+      <b-form-datepicker
+        id="catbirth1"
+        v-model.trim="editedCat.birth"
+        size="sm"
+        placeholder="Cat birthdate"
+        class="mb-2"
+      ></b-form-datepicker>
+      <b-form-select v-model="editedCat.gender" :options="editedCat.genders" class="mb-2"></b-form-select>
+      <b-form-textarea
+        id="catdescription1"
+        v-model="editedCat.description"
+        placeholder="Tell us a little about your cat"
+        rows="3"
+        max-rows="6"
+        class="mb-2"
+      ></b-form-textarea>
+      <input type="file" @change="addCatImage" />
+      <div class="mt-3">
+        Selected picture:
+        <img :src="editedCat.picture" alt width="250px" />
       </div>
       <template slot="footer">
         <base-button
           type="link"
           class="ml-auto"
-          @click="likePost(fullPost.id, fullPost.likes) | closePostModal()"
-        >{{ fullPost.likes }} likes</base-button>
-        <base-button
-          type="link"
-          class="ml-auto"
-          @click="closePostModal() | toggleCommentModal(fullPost)"
-        >Comment</base-button>
-        <base-button
-          type="link"
-          class="ml-auto"
-          @click="closePostModal() | deletePost(fullPost.id)"
-        >Delete</base-button>
-        <base-button type="link" class="ml-auto" @click="closePostModal()">Close</base-button>
-      </template>
-    </modal>
-
-    <modal :show.sync="showCommentModal" :showClose="false">
-      <template slot="header">Add a comment</template>
-      <base-input placeholder="Comment here...">
-        <textarea
-          class="form-control form-control-alternative"
-          name="name"
-          rows="4"
-          cols="110"
-          placeholder="Comment here..."
-          v-model.trim="comment"
-        ></textarea>
-      </base-input>
-      <template slot="footer">
-        <base-button
-          type="link"
-          class="ml-auto"
-          @click="addComment()"
-          :disabled="comment == ''"
+          @click="updateCat(shownCat.id) | toggleUpdateCatModal()"
+          :disabled="editedCat.name == '' || editedCat.birth == '' || editedCat == '' || editedCat == ''"
         >Save</base-button>
-        <base-button type="link" class="ml-auto" @click="toggleCommentModal()">Close</base-button>
+        <base-button type="link" class="ml-auto" @click="toggleUpdateCatModal()">Close</base-button>
       </template>
     </modal>
-
-    <modal :show.sync="showEditProfileModal" :showClose="false">
-      <template slot="header">Edit your profile</template>
-      <label for="username">Username</label>
-      <base-input
-        v-model.trim="username"
-        type="text"
-        :placeholder="userProfile.username"
-        id="username1"
-      />
-      <template slot="footer">
-        <base-button
-          type="link"
-          class="ml-auto"
-          @click="updateProfile() | toggleUpdateProfileModal()"
-          :disabled="username == ''"
-        >Save</base-button>
-        <base-button type="link" class="ml-auto" @click="toggleUpdateProfileModal()">Close</base-button>
-      </template>
-    </modal>
-
-    <modal :show.sync="showEditPostModal" :showClose="false">
-      <template slot="header">Edit your post</template>
-      <label for="username2">Title</label>
-      <base-input
-        v-model.trim="editedTitle"
-        type="text"
-        :placeholder="selectedPost.title"
-        id="username2"
-      />
-      <label for="editedContent">Content</label>
-      <textarea
-        class="form-control form-control-alternative"
-        name="name"
-        rows="4"
-        cols="110"
-        :placeholder="selectedPost.content"
-        v-model.trim="editedContent"
-      ></textarea>
-      <template slot="footer">
-        <base-button
-          type="link"
-          class="ml-auto"
-          @click="updatePost(selectedPost.id, editedTitle, editedContent) | toggleEditPostModal()"
-          :disabled="editedContent == '' || editedTitle == ''"
-        >Save</base-button>
-        <base-button type="link" class="ml-auto" @click="toggleEditPostModal()">Close</base-button>
-      </template>
-    </modal>
-
-    <modal :show.sync="showCreatePostModal" :showClose="false">
-      <template slot="header">Create a post</template>
-      <label for="title2">Title</label>
-      <base-input
-        v-model.trim="createdPost.title"
-        type="text"
-        placeholder="Your title"
-        id="title2"
-      />
-      <label for="content2">Content</label>
-      <textarea
-        class="form-control form-control-alternative"
-        rows="4"
-        cols="110"
-        placeholder="Your content"
-        v-model.trim="createdPost.content"
-        id="content2"
-      ></textarea>
-      <label for="picture">Pictures</label>
-      <br />
-      <input type="file" @change="addImage" />
-      <hr />
-      <div v-for="picture in createdPost.picture" :key="picture.id">
-        <img :src="picture" alt width="250px" />
-        <hr />
-      </div>
-      <template slot="footer">
-        <base-button
-          type="link"
-          class="ml-auto"
-          @click="createPost() | toggleCreatePostModal()"
-          :disabled="createdPost.content == '' || createdPost.title == ''"
-        >Create</base-button>
-        <base-button type="link" class="ml-auto" @click="toggleCreatePostModal()">Close</base-button>
-      </template>
-    </modal>-->
   </div>
 </template>
 <script>
@@ -243,8 +133,8 @@ import { mapState } from "vuex";
 //import { commentsCollection, postsCollection } from "@/firebase";
 import Modal from "@/components/Modal";
 import BaseInput from "@/components/BaseInput";
-//import { auth } from "@/firebase";
-//import * as fb from "@/firebase";
+import { auth } from "@/firebase";
+import * as fb from "@/firebase";
 export default {
   components: {
     Modal,
@@ -252,123 +142,52 @@ export default {
   },
   data() {
     return {
-      post: {
-        title: "",
-        content: "",
+      editedCat: {
+        name: "",
+        description: "",
+        gender: "",
+        birth: "",
+        picture: "",
+        genders: [
+          { value: "", text: "Choose cat gender" },
+          { value: "Male", text: "Male" },
+          { value: "Female", text: "Female" },
+        ],
       },
-      createdPost: {
-        content: "",
-        title: "",
-        picture: [],
-      },
-      showEditProfileModal: false,
-      showEditPostModal: false,
-      showCommentModal: false,
-      showCreatePostModal: false,
-      selectedPost: {},
-      showPostModal: false,
-      fullPost: {},
-      postComments: [],
-      comment: "",
-      username: "",
-      editedContent: "",
-      editedTitle: "",
-      slide: 0,
-      sliding: null,
+      showUpdateCatModal: false,
     };
   },
   computed: {
     ...mapState(["userProfile", "shownCat"]),
   },
   methods: {
-    likePost(id, likesCount) {
-      this.$store.dispatch("likePost", { id, likesCount });
-    },
-    async viewPost(post) {
-      const docs = await commentsCollection
-        .where("postId", "==", post.id)
-        .get();
-      docs.forEach((doc) => {
-        let comment = doc.data();
-        comment.id = doc.id;
-        this.postComments.push(comment);
+    async updateCat(id) {
+      this.$store.dispatch("updateCat", {
+        id: id,
+        name: this.editedCat.name ? this.editedCat.name : shownCat.name,
+        description: this.editedCat.description
+          ? this.editedCat.description
+          : shownCat.description,
+        birth: this.editedCat.birth ? this.editedCat.birth : shownCat.birth,
+        gender: this.editedCat.gender ? this.editedCat.gender : shownCat.gender,
+        picture: this.editedCat.picture
+          ? this.editedCat.picture
+          : shownCat.picture,
       });
-      this.fullPost = post;
-      this.showPostModal = true;
     },
-    closePostModal() {
-      this.postComments = [];
-      this.showPostModal = false;
+    async deleteCat(id) {
+      console.log(id);
+      this.$store.dispatch("deleteCat", id);
     },
-    async addComment() {
-      await commentsCollection.add({
-        createdOn: new Date(),
-        content: this.comment,
-        postId: this.selectedPost.id,
-        userId: auth.currentUser.uid,
-        userName: this.$store.state.userProfile.username,
-      });
-      await postsCollection.doc(this.selectedPost.id).update({
-        comments: parseInt(this.selectedPost.comments) + 1,
-      });
-      this.comment = "";
-      this.showCommentModal = !this.showCommentModal;
+    toggleUpdateCatModal() {
+      this.editedCat.name = "";
+      this.editedCat.description = "";
+      this.editedCat.gender = "";
+      this.editedCat.birth = "";
+      this.editedCat.picture = "";
+      this.showUpdateCatModal = !this.showUpdateCatModal;
     },
-    toggleCommentModal(post) {
-      this.showCommentModal = !this.showCommentModal;
-      if (this.showCommentModal) {
-        this.selectedPost = post;
-      } else {
-        this.selectedPost = {};
-      }
-      this.comment = "";
-    },
-    toggleEditPostModal(post) {
-      this.showEditPostModal = !this.showEditPostModal;
-      if (this.showEditPostModal) {
-        this.selectedPost = post;
-      } else {
-        this.selectedPost = {};
-        this.editedContent = "";
-        this.editedTitle = "";
-      }
-    },
-    toggleUpdateProfileModal() {
-      this.showEditProfileModal = !this.showEditProfileModal;
-      this.username = "";
-    },
-    async updateProfile() {
-      this.$store.dispatch("updateProfile", {
-        username:
-          this.username !== "" ? this.username : this.userProfile.username,
-      });
-      this.username = "";
-    },
-    async updatePost(id, title, content) {
-      this.$store.dispatch("updatePost", { id, title, content });
-      this.editedTitle = "";
-      this.editedContent = "";
-    },
-    toggleCreatePostModal() {
-      this.showCreatePostModal = !this.showCreatePostModal;
-      this.createdPost.title = "";
-      this.createdPost.content = "";
-      this.createdPost.picture = [];
-    },
-    async createPost() {
-      this.$store.dispatch("createPost", {
-        content: this.createdPost.content,
-        title: this.createdPost.title,
-        picture: this.createdPost.picture,
-      });
-      this.createdPost.content = "";
-      this.createdPost.title = "";
-      this.createdPost.picture = [];
-    },
-    async deletePost(id) {
-      this.$store.dispatch("deletePost", id);
-    },
-    addImage(i) {
+    addCatImage(i) {
       let image = i.target.files[0];
       let storeRef = fb.store.ref(fb.auth.currentUser.uid + "/" + image.name);
       let uploadTask = storeRef.put(image);
@@ -378,16 +197,10 @@ export default {
         (error) => {},
         () => {
           uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
-            this.createdPost.picture.push(downloadURL);
+            this.editedCat.picture = downloadURL;
           });
         }
       );
-    },
-    onSlideStart(slide) {
-      this.sliding = true;
-    },
-    onSlideEnd(slide) {
-      this.sliding = false;
     },
   },
   filters: {

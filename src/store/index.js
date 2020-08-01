@@ -95,7 +95,8 @@ const store = new Vuex.Store({
       });
       // create user profile object in userCollections
       await fb.usersCollection.doc(user.uid).set({
-        username: form.username
+        username: form.username,
+        picture: ""
       })
       await fb.auth.signOut()
       commit('setUserProfile', {})
@@ -131,7 +132,8 @@ const store = new Vuex.Store({
       const userId = fb.auth.currentUser.uid
       // update user object
       const userRef = await fb.usersCollection.doc(userId).update({
-        username: user.username
+        username: user.username,
+        picture: user.picture
       })
 
       dispatch('fetchUserProfile', { uid: userId })
@@ -152,6 +154,16 @@ const store = new Vuex.Store({
         })
       })
     },
+    async updateCat({ dispatch }, cat) {
+      const catRef = await fb.catsCollection.doc(cat.id).update({
+        birth: cat.birth,
+        description: cat.description,
+        gender: cat.gender,
+        name: cat.name,
+        owner: fb.auth.currentUser.uid,
+        picture: cat.picture
+      });
+    },
     async updatePost({ dispatch }, post) {
       const postRef = await fb.postsCollection.doc(post.id).update({
         title: post.title,
@@ -161,7 +173,9 @@ const store = new Vuex.Store({
     },
     async showCat({ state, commit }, id) {
       fb.db.collection("cats").doc(id).onSnapshot(snapshot => {
-        commit("setShownCat", snapshot.data())
+        let cat = snapshot.data()
+        cat.id = snapshot.id
+        commit("setShownCat", cat)
         router.push('/catprofile')
       })
     },
@@ -178,13 +192,19 @@ const store = new Vuex.Store({
       });
     },
     async createCat({ state, commit }, cat) {
-      await fb.catsCollection.add({
+      let catRef = await fb.catsCollection.add({
         name: cat.name,
         birth: cat.birth,
         gender: cat.gender,
         description: cat.description,
         picture: cat.picture,
         owner: fb.auth.currentUser.uid
+      })
+      catRef.get().then(snapshot => {
+        let shownCat = snapshot.data()
+        shownCat.id = snapshot.id
+        commit("setShownCat", shownCat)
+        router.push('/catprofile')
       })
     },
     async deletePost({ state, commit }, id) {
@@ -200,6 +220,10 @@ const store = new Vuex.Store({
             })
           })
         )
+    },
+    async deleteCat({ dispatch }, id) {
+      fb.db.collection("cats").doc(id).delete()
+        .then(router.push('/profile'))
     }
   }
 })
