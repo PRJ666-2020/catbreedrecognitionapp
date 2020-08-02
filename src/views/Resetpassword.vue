@@ -1,14 +1,14 @@
 <template>
   <section class="section section-shaped section-lg my-0">
     <div class="shape shape-style-1 bg-gradient-default">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
     </div>
     <div class="container pt-lg-md">
       <div class="row justify-content-center">
@@ -22,18 +22,24 @@
           >
             <template>
               <p>Please enter your email address to reset your password</p>
-              <ValidationObserver v-slot="{ handleSubmit }">
-                <form @submit.prevent="handleSubmit(onSubmit)">
-                  <div class="form-group">
-                    <label>Email address</label>
-                    <ValidationProvider name="Email" rules="minmax:8,25|required" v-slot="v">
-                      <input v-model="email" type="email" placeholder="Email" class="form-control" />
-                      <small class="form-text text-muted">{{v.errors[0]}}</small>
-                    </ValidationProvider>
-                  </div>
-                  <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
-              </ValidationObserver>
+              <!-- <ValidationObserver v-slot="{ handleSubmit }"> -->
+              <form @submit.prevent>
+                <div class="form-group">
+                  <label>Email address</label>
+                  <!-- <ValidationProvider name="Email" rules="minmax:8,25|required" v-slot="v"> -->
+                  <input
+                    v-model.trim="email"
+                    type="email"
+                    placeholder="Email"
+                    class="form-control"
+                    id="email1"
+                  />
+                  <!-- <small class="form-text text-muted">{{v.errors[0]}}</small> -->
+                  <!-- </ValidationProvider> -->
+                </div>
+                <button type="submit" class="btn btn-primary" @click="resetPassword()">Submit</button>
+              </form>
+              <!-- </ValidationObserver> -->
             </template>
           </card>
           <div class="row mt-3">
@@ -59,22 +65,27 @@
   </section>
 </template>
 <script>
-import { minmax, required, confirmPassword } from "../validation";
-import { ValidationProvider, ValidationObserver } from "vee-validate";
+import { auth } from "@/firebase";
+
 export default {
-  data: () => ({
-    email: "",
-  }),
-  components: {
-    ValidationProvider,
-    ValidationObserver
+  data() {
+    return {
+      email: "",
+      showSuccess: false,
+      errorMsg: ""
+    };
   },
   methods: {
-    onSubmit() {
-      alert("Link has been sent your email!");
+    async resetPassword() {
+      this.errorMsg = "";
+
+      try {
+        await auth.sendPasswordResetEmail(this.email);
+        this.showSuccess = true;
+      } catch (err) {
+        this.errorMsg = err.message;
+      }
     }
   }
 };
 </script>
-<style>
-</style>
