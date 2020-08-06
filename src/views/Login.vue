@@ -90,7 +90,6 @@ export default {
   computed: {
     ...mapState(["error"]),
   },
->>>>>>> ErisWorking
   methods: {
     login() {
       this.$store.dispatch("login", {

@@ -17,7 +17,6 @@
       </div>
 
       <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
-<<<<<<< HEAD
         
                 <base-dropdown tag="li" class="nav-item">
                     <a slot="title" class="nav-link" data-toggle="dropdown" role="button">
@@ -134,61 +133,13 @@
                     </div>
                 </base-dropdown>        
 
-=======
-        <base-dropdown class="nav-item" menu-classes="dropdown-menu-xl">
-          <a slot="title" href="#" class="nav-link" data-toggle="dropdown" role="button">
-            <i class="ni ni-ui-04 d-lg-none"></i>
-            <span class="nav-link-inner--text">Breed</span>
-          </a>
-          <div class="dropdown-menu-inner">
-            <a
-              href="https://demos.creative-tim.com/vue-argon-design-system/documentation/"
-              class="media d-flex align-items-center"
-            >
-              <div>
-                <img
-                  v-lazy="'img/theme/shorthair.jpg'"
-                  alt="Raised circle image"
-                  class="img-fluid rounded-circle shadow-lg"
-                  style="width: 50px;"
-                />
-              </div>
-              <div class="media-body ml-3">
-                <h6 class="heading text-primary mb-md-1">Short hair</h6>
-                <p class="description d-none d-md-inline-block mb-0">Short hair list</p>
-              </div>
-            </a>
-            <a
-              href="https://demos.creative-tim.com/vue-argon-design-system/documentation/"
-              class="media d-flex align-items-center"
-            >
-              <div>
-                <img
-                  v-lazy="'img/theme/longhair.jpg'"
-                  alt="Raised circle image"
-                  class="img-fluid rounded-circle shadow-lg"
-                  style="width: 50px;"
-                />
-              </div>
-              <div class="media-body ml-3">
-                <h5 class="heading text-warning mb-md-1">Long hair</h5>
-                <p class="description d-none d-md-inline-block mb-0">Long hair list</p>
-              </div>
-            </a>
-          </div>
-        </base-dropdown>
->>>>>>> ErisWorking
         <base-dropdown tag="li" class="nav-item">
           <a slot="title" href="#" class="nav-link" data-toggle="dropdown" role="button">
             <i class="ni ni-collection d-lg-none"></i>
             <span class="nav-link-inner--text">Account</span>
           </a>
-<<<<<<< HEAD
-          <router-link to="/profile" class="dropdown-item" v-if="loggedIn">Profile</router-link>
-=======
           <router-link to="/profile" class="dropdown-item" v-if="loggedIn">Your profile</router-link>
           <!-- <router-link to="/catprofile" class="dropdown-item" v-if="loggedIn">See your cats</router-link> -->
->>>>>>> ErisWorking
           <router-link to="/login" class="dropdown-item" v-if="!loggedIn">Login</router-link>
           <router-link to="/register" class="dropdown-item" v-if="!loggedIn">Register</router-link>
           <li class="dropdown-item" v-if="loggedIn">
@@ -264,51 +215,11 @@ export default {
       return Object.keys(this.userProfile).length > 0;
     },
   },
-<<<<<<< HEAD
-  computed: {
-    ...mapState(["userProfile"]),
-    loggedIn() {
-      return Object.keys(this.userProfile).length > 0;
-    }
-  },
-     
-  methods: {
-    logout() {
-      this.$store.dispatch("logout");
-
-    }
-  }
-=======
-  // data() {
-  //   return {
-  //     // showbreedlist: true,
-  //     // showsearchbar: true,
-  //     showLogout: false
-  //   };
-  // },
-  // watch: {
-  //   //if user logged in dont show login or register
-
-  //   $route() {
-  //     if (this.$route.path === "/register") {
-  //       (this.showbreedlist = false), (this.showsearchbar = false);
-  //     } else if (this.$route.path === "/login") {
-  //       (this.showbreedlist = false), (this.showsearchbar = false);
-  //     } else if (this.$route.path === "/profile") {
-  //       (this.showbreedlist = false),
-  //         (this.showsearchbar = false),
-  //         (this.showlogout = true);
-  //     } else if (this.$route.path === "/") {
-  //       (this.showbreedlist = true), (this.showsearchbar = true);
-  //     }
-  //   }
-  // },
   methods: {
     logout() {
       this.$store.dispatch("logout");
     },
   },
->>>>>>> ErisWorking
 };
 </script>
 <style>

@@ -19,32 +19,25 @@
               <div class="col-lg-3 order-lg-2">
                 <div class="card-profile-image">
                   <a href="#">
-<<<<<<< HEAD
-                    <img v-lazy="'img/theme/longhair.jpg'" class="rounded-circle" />
-=======
                     <img
                       v-if="!userProfile.picture"
                       v-lazy="'img/theme/longhair.jpg'"
                       class="rounded-circle"
                     />
                     <img v-else v-lazy="userProfile.picture" class="rounded-circle" />
->>>>>>> ErisWorking
                   </a>
                 </div>
               </div>
+
               <div class="col-lg-4 order-lg-3 text-lg-right align-self-lg-center">
                 <div class="card-profile-actions py-4 mt-lg-0">
                   <base-button
                     type="primary"
                     size="sm"
                     class="mr-4"
-<<<<<<< HEAD
-                    @click="toggleCreatePostModal()"
-                  >Create Post</base-button>
-=======
                     @click="toggleCreateCatModal()"
                   >Create Cat Profile</base-button>
->>>>>>> ErisWorking
+                  
                   <base-button
                     type="default"
                     size="sm"
@@ -60,16 +53,6 @@
                     <span class="heading">{{posts.filter(post => post.userId == isUser).length}}</span>
                     <span class="description">Posts</span>
                   </div>
-<<<<<<< HEAD
-                </div>
-              </div>
-            </div>
-
-            <div class="text-center mt-5">
-              <h3>{{ userProfile.username }}</h3>
-            </div>
-
-=======
                   <div>
                     <base-button
                       type="primary"
@@ -95,7 +78,6 @@
                 </li>
               </ul>
             </div>
->>>>>>> ErisWorking
             <div class="mt-5 py-5 border-top text-center">
               <div class="text-center mt-5">
                 <h3>Your posts</h3>
@@ -205,37 +187,24 @@
       <template slot="header">Edit your profile</template>
       <label for="username">Username</label>
       <base-input
-<<<<<<< HEAD
-        v-model.trim="username"
-=======
         v-model.trim="editedProfile.username"
->>>>>>> ErisWorking
         type="text"
         :placeholder="userProfile.username"
         id="username1"
       />
-<<<<<<< HEAD
-=======
       <input type="file" @change="addProfileImage" />
       <img v-if="editedProfile.picture" :src="editedProfile.picture" />
->>>>>>> ErisWorking
       <template slot="footer">
         <base-button
           type="link"
           class="ml-auto"
           @click="updateProfile() | toggleUpdateProfileModal()"
-<<<<<<< HEAD
-          :disabled="username == ''"
-=======
           :disabled="editedProfile.username == ''"
->>>>>>> ErisWorking
         >Save</base-button>
         <base-button type="link" class="ml-auto" @click="toggleUpdateProfileModal()">Close</base-button>
       </template>
     </modal>
 
-<<<<<<< HEAD
-=======
     <modal :show.sync="showCreateCatModal" :showClose="false">
       <template slot="header">Create a cat profile</template>
       <base-input v-model.trim="createdCat.name" type="text" placeholder="Cat name" id="catname1" />
@@ -271,7 +240,6 @@
       </template>
     </modal>
 
->>>>>>> ErisWorking
     <modal :show.sync="showEditPostModal" :showClose="false">
       <template slot="header">Edit your post</template>
       <label for="username2">Title</label>
@@ -282,10 +250,7 @@
         id="username2"
       />
       <label for="editedContent">Content</label>
-<<<<<<< HEAD
-=======
       <small class="text-warning" v-show="editedContent.length > 300">Post has a 300 character limit</small>
->>>>>>> ErisWorking
       <textarea
         class="form-control form-control-alternative"
         name="name"
@@ -299,11 +264,7 @@
           type="link"
           class="ml-auto"
           @click="updatePost(selectedPost.id, editedTitle, editedContent) | toggleEditPostModal()"
-<<<<<<< HEAD
-          :disabled="editedContent == '' || editedTitle == ''"
-=======
           :disabled="editedContent == '' || editedContent.length > 300 || editedTitle == ''"
->>>>>>> ErisWorking
         >Save</base-button>
         <base-button type="link" class="ml-auto" @click="toggleEditPostModal()">Close</base-button>
       </template>
@@ -327,14 +288,11 @@
         v-model.trim="createdPost.content"
         id="content2"
       ></textarea>
-<<<<<<< HEAD
-=======
       <small
         class="text-warning"
         v-show="createdPost.content.length > 300"
       >Post has a 300 character limit</small>
       <br />
->>>>>>> ErisWorking
       <label for="picture">Pictures</label>
       <br />
       <input type="file" @change="addImage" />
@@ -348,11 +306,7 @@
           type="link"
           class="ml-auto"
           @click="createPost() | toggleCreatePostModal()"
-<<<<<<< HEAD
-          :disabled="createdPost.content == '' || createdPost.title == ''"
-=======
           :disabled="createdPost.content == '' || createdPost.content.length > 300 || createdPost.title == ''"
->>>>>>> ErisWorking
         >Create</base-button>
         <base-button type="link" class="ml-auto" @click="toggleCreatePostModal()">Close</base-button>
       </template>
@@ -384,8 +338,6 @@ export default {
         title: "",
         picture: [],
       },
-<<<<<<< HEAD
-=======
       createdCat: {
         name: "",
         description: "",
@@ -398,7 +350,6 @@ export default {
           { value: "Female", text: "Female" },
         ],
       },
->>>>>>> ErisWorking
       showEditProfileModal: false,
       showEditPostModal: false,
       showCommentModal: false,
@@ -408,30 +359,19 @@ export default {
       fullPost: {},
       postComments: [],
       comment: "",
-<<<<<<< HEAD
-      username: "",
-=======
       editedProfile: {
         username: "",
         picture: "",
       },
->>>>>>> ErisWorking
       editedContent: "",
       editedTitle: "",
       slide: 0,
       sliding: null,
-<<<<<<< HEAD
-    };
-  },
-  computed: {
-    ...mapState(["userProfile", "posts"]),
-=======
       showCreateCatModal: false,
     };
   },
   computed: {
     ...mapState(["userProfile", "posts", "cats"]),
->>>>>>> ErisWorking
     isUser() {
       return fb.auth.currentUser.uid;
     },
@@ -491,9 +431,6 @@ export default {
     },
     toggleUpdateProfileModal() {
       this.showEditProfileModal = !this.showEditProfileModal;
-<<<<<<< HEAD
-      this.username = "";
-=======
       this.editedProfile.username = "";
       this.editedProfile.picture = "";
     },
@@ -504,14 +441,10 @@ export default {
       this.createdCat.birth = "";
       this.createdCat.picture = "";
       this.showCreateCatModal = !this.showCreateCatModal;
->>>>>>> ErisWorking
     },
     async updateProfile() {
       this.$store.dispatch("updateProfile", {
         username:
-<<<<<<< HEAD
-          this.username !== "" ? this.username : this.userProfile.username,
-=======
           this.editedProfile.username !== ""
             ? this.editedProfile.username
             : this.userProfile.username,
@@ -519,7 +452,6 @@ export default {
           this.editedProfile.picture !== ""
             ? this.editedProfile.picture
             : this.userProfile.picture,
->>>>>>> ErisWorking
       });
       this.username = "";
     },
@@ -544,11 +476,6 @@ export default {
       this.createdPost.title = "";
       this.createdPost.picture = [];
     },
-<<<<<<< HEAD
-    async deletePost(id) {
-      this.$store.dispatch("deletePost", id);
-    },
-=======
     async createCat() {
       this.$store.dispatch("createCat", {
         name: this.createdCat.name,
@@ -564,7 +491,6 @@ export default {
     async showCat(id) {
       this.$store.dispatch("showCat", id);
     },
->>>>>>> ErisWorking
     addImage(i) {
       let image = i.target.files[0];
       let storeRef = fb.store.ref(fb.auth.currentUser.uid + "/" + image.name);
@@ -580,8 +506,6 @@ export default {
         }
       );
     },
-<<<<<<< HEAD
-=======
     addCatImage(i) {
       let image = i.target.files[0];
       let storeRef = fb.store.ref(fb.auth.currentUser.uid + "/" + image.name);
@@ -612,7 +536,6 @@ export default {
         }
       );
     },
->>>>>>> ErisWorking
     onSlideStart(slide) {
       this.sliding = true;
     },

@@ -21,74 +21,6 @@
             class="border-0"
           >
             <template>
-<<<<<<< HEAD
-              <!-- <ValidationObserver v-slot="{ handleSubmit }"> -->
-              <form @submit.prevent>
-                <div class="form-group">
-                  <label>Username</label>
-                  <!-- <ValidationProvider name="Username" rules="minmax:8,25|required" v-slot="v"> -->
-                  <input
-                    v-model.trim="signupForm.username"
-                    type="text"
-                    placeholder="Username"
-                    class="form-control"
-                    id="name1"
-                  />
-                  <!-- <small class="form-text text-danger">{{v.errors[0]}}</small> -->
-                  <!-- </ValidationProvider> -->
-                </div>
-                <div class="form-group">
-                  <label>Email address</label>
-                  <!-- <ValidationProvider name="Email" rules="minmax:8,25|required" v-slot="v"> -->
-                  <input
-                    v-model.trim="signupForm.email"
-                    type="email"
-                    placeholder="Email"
-                    class="form-control"
-                    id="email1"
-                  />
-                  <!-- <small class="form-text text-danger">{{v.errors[0]}}</small> -->
-                  <!-- </ValidationProvider> -->
-                </div>
-                <div class="form-group">
-                  <label>Password</label>
-                  <!-- <ValidationProvider
-                    name="Password"
-                    rules="required|password:@Confirming"
-                    v-slot="v"
-                  >-->
-                  <input
-                    type="password"
-                    v-model="signupForm.password"
-                    placeholder="Password"
-                    class="form-control"
-                    id="password1"
-                  />
-                  <!-- <small class="form-text text-danger">{{v.errors[0]}}</small>
-                  </ValidationProvider>-->
-                </div>
-
-                <!-- <div class="form-group">
-                  <label>Confirm password</label>
-                  <ValidationProvider
-                    name="Confirming"
-                    vid="Confirming"
-                    rules="required"
-                    v-slot="v"
-                  >
-                    <input
-                      type="password"
-                      v-model="confirmation"
-                      placeholder="Confirm password"
-                      class="form-control"
-                    />
-                    <small class="form-text text-danger">{{v.errors[0]}}</small>
-                  </ValidationProvider>
-                </div>-->
-                <button type="submit" class="btn btn-primary" @click="signup()">Submit</button>
-              </form>
-              <!-- </ValidationObserver> -->
-=======
               <ValidationObserver v-slot="{ invalid }">
                 <form @submit.prevent>
                   <div class="form-group">
@@ -150,7 +82,6 @@
                   >Submit</button>
                 </form>
               </ValidationObserver>
->>>>>>> ErisWorking
             </template>
           </card>
           <div class="row mt-3">
@@ -177,9 +108,6 @@
 </template>
 
 <script>
-<<<<<<< HEAD
-export default {
-=======
 import { extend, ValidationObserver, ValidationProvider } from "vee-validate";
 import * as rules from "vee-validate/dist/rules";
 import { messages } from "vee-validate/dist/locale/en.json";
@@ -196,19 +124,13 @@ export default {
     ValidationObserver,
     ValidationProvider,
   },
->>>>>>> ErisWorking
   data() {
     return {
       signupForm: {
         username: "",
         email: "",
-<<<<<<< HEAD
-        password: ""
-      }
-=======
         password: "",
       },
->>>>>>> ErisWorking
     };
   },
   methods: {
@@ -216,17 +138,10 @@ export default {
       this.$store.dispatch("signup", {
         email: this.signupForm.email,
         password: this.signupForm.password,
-<<<<<<< HEAD
-        username: this.signupForm.username
-      });
-    }
-  }
-=======
         username: this.signupForm.username,
       });
     },
   },
->>>>>>> ErisWorking
 };
 </script>
 <style>

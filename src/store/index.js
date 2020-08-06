@@ -1,19 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import * as fb from '../firebase'
-<<<<<<< HEAD
-
-
-import router from '../router/index'
-Vue.use(Vuex)
-
-fb.postsCollection.orderBy('createdOn', 'desc').onSnapshot(snapshot => {
-  let postsArray = []
-
-=======
-import router from '../router/index'
 import { auth } from 'firebase'
-
+import router from '../router/index'
 Vue.use(Vuex)
 
 fb.breedsCollection.get().then(function(querySnapshot){
@@ -29,7 +18,6 @@ fb.breedsCollection.get().then(function(querySnapshot){
 
 fb.postsCollection.orderBy('createdOn', 'desc').onSnapshot(snapshot => {
   let postsArray = []
->>>>>>> ErisWorking
   snapshot.forEach(doc => {
     let post = doc.data()
     post.id = doc.id
@@ -40,12 +28,6 @@ fb.postsCollection.orderBy('createdOn', 'desc').onSnapshot(snapshot => {
   store.commit('setPosts', postsArray)
 })
 
-<<<<<<< HEAD
-const store = new Vuex.Store({
-  state: {
-    userProfile: {},
-    posts: []
-=======
 fb.catsCollection.get().then(function (querySnapshot) {
   let catsArray = []
   querySnapshot.forEach(function (doc) {
@@ -66,7 +48,6 @@ const store = new Vuex.Store({
     breed: [],
     shownCat: {},
     error: ""
->>>>>>> ErisWorking
   },
   mutations: {
     setUserProfile(state, val) {
@@ -74,21 +55,7 @@ const store = new Vuex.Store({
     },
     setPosts(state, val) {
       state.posts = val
-<<<<<<< HEAD
-    }
-  },
-  actions: {
-    async login({ dispatch }, form) {
-      // sign user in
-      const { user } = await fb.auth.signInWithEmailAndPassword(form.email, form.password)
 
-      // fetch user profile and set in state
-      dispatch('fetchUserProfile', user)
-    },
-    async fetchUserProfile({ commit }, user) {
-
-      console.log(user)
-=======
     },
     setCats(state, val) {
       state.cats = val
@@ -103,6 +70,7 @@ const store = new Vuex.Store({
       state.breed = val;
     }
   },
+
   actions: {
     async login({ dispatch, commit }, form) {
       // sign user in
@@ -119,23 +87,17 @@ const store = new Vuex.Store({
 
     },
     async fetchUserProfile({ commit }, user) {
->>>>>>> ErisWorking
+
       // fetch user profile
       const userProfile = await fb.usersCollection.doc(user.uid).get()
 
       // set user profile in state
       commit('setUserProfile', userProfile.data())
-<<<<<<< HEAD
-      console.log("THIS fetch function is called")
-      console.log(router.currentRoute.path)
-=======
->>>>>>> ErisWorking
 
       // change route to dashboard
       if (router.currentRoute.path === '/login') {
         router.push('/profile')
       }
-<<<<<<< HEAD
       if (router.currentRoute.path === '/register') {
         router.push('/profile')
       }
@@ -143,22 +105,7 @@ const store = new Vuex.Store({
 
     },
 
-    async signup({ dispatch }, form) {
-      // sign user up
-      const { user } = await fb.auth.createUserWithEmailAndPassword(form.email, form.password)
 
-      // create user profile object in userCollections
-      await fb.usersCollection.doc(user.uid).set({
-        username: form.username
-      })
-
-      // fetch user profile and set in state
-      dispatch('fetchUserProfile', user)
-=======
-      else if (router.currentRoute.path === '/register') {
-        router.push('/profile')
-      }
-    },
     async signup({ dispatch, commit }, form) {
       // sign user up
       const { user } = await fb.auth.createUserWithEmailAndPassword(form.email, form.password)
@@ -175,7 +122,7 @@ const store = new Vuex.Store({
       await fb.auth.signOut()
       commit('setUserProfile', {})
       router.push('/login')
->>>>>>> ErisWorking
+
     },
     async logout({ commit }) {
       await fb.auth.signOut()
@@ -184,10 +131,6 @@ const store = new Vuex.Store({
       commit('setUserProfile', {})
       router.push('/login')
     },
-<<<<<<< HEAD
-
-=======
->>>>>>> ErisWorking
     async likePost({ commit }, post) {
       const userId = fb.auth.currentUser.uid
       const docId = `${userId}_${post.id}`
@@ -211,12 +154,8 @@ const store = new Vuex.Store({
       const userId = fb.auth.currentUser.uid
       // update user object
       const userRef = await fb.usersCollection.doc(userId).update({
-<<<<<<< HEAD
-        username: user.username
-=======
         username: user.username,
         picture: user.picture
->>>>>>> ErisWorking
       })
 
       dispatch('fetchUserProfile', { uid: userId })
@@ -237,8 +176,6 @@ const store = new Vuex.Store({
         })
       })
     },
-<<<<<<< HEAD
-=======
     async updateCat({ dispatch }, cat) {
       const catRef = await fb.catsCollection.doc(cat.id).update({
         birth: cat.birth,
@@ -249,7 +186,6 @@ const store = new Vuex.Store({
         picture: cat.picture
       });
     },
->>>>>>> ErisWorking
     async updatePost({ dispatch }, post) {
       const postRef = await fb.postsCollection.doc(post.id).update({
         title: post.title,
@@ -257,10 +193,6 @@ const store = new Vuex.Store({
         createdOn: new Date()
       })
     },
-<<<<<<< HEAD
-    async createPost({ state, commit }, post) {
-
-=======
     async showCat({ state, commit }, id) {
       fb.db.collection("cats").doc(id).onSnapshot(snapshot => {
         let cat = snapshot.data()
@@ -270,7 +202,6 @@ const store = new Vuex.Store({
       })
     },
     async createPost({ state, commit }, post) {
->>>>>>> ErisWorking
       await fb.postsCollection.add({
         createdOn: new Date(),
         title: post.title,
@@ -282,8 +213,6 @@ const store = new Vuex.Store({
         likes: 0
       });
     },
-<<<<<<< HEAD
-=======
     async createCat({ state, commit }, cat) {
       let catRef = await fb.catsCollection.add({
         name: cat.name,
@@ -300,7 +229,6 @@ const store = new Vuex.Store({
         router.push('/catprofile')
       })
     },
->>>>>>> ErisWorking
     async deletePost({ state, commit }, id) {
       const userId = fb.auth.currentUser.uid
       const likeId = `${userId}_${id}`
@@ -314,13 +242,10 @@ const store = new Vuex.Store({
             })
           })
         )
-<<<<<<< HEAD
-=======
     },
     async deleteCat({ dispatch }, id) {
       fb.db.collection("cats").doc(id).delete()
         .then(router.push('/profile'))
->>>>>>> ErisWorking
     }
   }
 })
