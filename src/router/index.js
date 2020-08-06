@@ -12,6 +12,10 @@ import HomePage from "../views/Homepage.vue"
 import BreedList from "../views/BreedList.vue"
 import { auth } from '../firebase'
 import Home from "../views/Home.vue"
+import { auth } from '../firebase'
+import Home from "../views/Home"
+import CatProfile from "../views/CatProfile.vue"
+import Breedlist from "../views/BreedList.vue"
 
 Vue.use(Router)
 
@@ -22,7 +26,7 @@ const routes = [
   },
   {
     path: '/home',
-    name: 'HomePage',
+    name: 'Main',
     components: {
       header: AppHeader,
       default: Home,
@@ -39,6 +43,8 @@ const routes = [
     }
   },
   {
+
+
     path: '/login',
     name: 'Login',
     components: {
@@ -69,6 +75,18 @@ const routes = [
     }
   },
   {
+    path: "/catprofile",
+    name: "CatProfile",
+    components: {
+      header: AppHeader,
+      default: CatProfile,
+      footer: AppFooter
+    },
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
     path: "/resetpassword",
     name: "resetpassword",
     components: {
@@ -86,7 +104,16 @@ const routes = [
       footer: AppFooter
     }
   },
+  {
 
+    path: "/breedlist",
+    name: "Breedlist",
+    components: {
+      header: AppHeader,
+      default: Breedlist,
+      footer: AppFooter
+    }
+  }
 ]
 
 const router = new Router({

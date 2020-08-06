@@ -20,26 +20,11 @@
             body-classes="px-lg-5 py-lg-5"
             class="border-0"
           >
-            <!-- <template>
-                            <div class="text-muted text-center mb-3">
-                                <small>Sign in with</small>
-                            </div>
-                            <div class="btn-wrapper text-center">
-                                <base-button type="neutral">
-                                    <img slot="icon" src="img/icons/common/github.svg">
-                                    Github
-                                </base-button>
 
-                                <base-button type="neutral">
-                                    <img slot="icon" src="img/icons/common/google.svg">
-                                    Google
-                                </base-button>
-                            </div>
-            </template>-->
+
             <template>
-              <!-- <div class="text-center text-muted mb-4">
-                <small>Or sign in with credentials</small>
-              </div>-->
+              <small class="text-warning" v-show="error.length > 0">{{ error }}</small>
+
               <form role="form" @submit.prevent>
                 <base-input
                   alternative
@@ -58,10 +43,7 @@
                   addon-left-icon="ni ni-lock-circle-open"
                   id="password1"
                 ></base-input>
-                <!-- <base-checkbox>Remember me</base-checkbox> -->
-                <!-- <div v-if="isError" class="text-muted text-center mb-3 warning">
-                  <small class="form-text text-danger">Username or password is not correct</small>
-                </div>-->
+
                 <div class="text-center">
                   <base-button type="primary" class="my-4" @click="login()">Sign In</base-button>
                 </div>
@@ -92,22 +74,30 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+import { auth } from "@/firebase";
+import * as fb from "@/firebase";
+
 export default {
   data() {
     return {
       loginForm: {
         email: "",
-        password: ""
-      }
+        password: "",
+      },
     };
   },
+  computed: {
+    ...mapState(["error"]),
+  },
+>>>>>>> ErisWorking
   methods: {
     login() {
       this.$store.dispatch("login", {
         email: this.loginForm.email,
-        password: this.loginForm.password
+        password: this.loginForm.password,
       });
-    }
-  }
+    },
+  },
 };
 </script>
