@@ -1,8 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import * as fb from '../firebase'
-import { auth } from 'firebase'
 import router from '../router/index'
+import { auth } from 'firebase'
+
 Vue.use(Vuex)
 
 fb.breedsCollection.get().then(function(querySnapshot){
@@ -55,7 +56,6 @@ const store = new Vuex.Store({
     },
     setPosts(state, val) {
       state.posts = val
-
     },
     setCats(state, val) {
       state.cats = val
@@ -68,6 +68,7 @@ const store = new Vuex.Store({
     },
     setBreeds(state,val){
       state.breed = val;
+
     }
   },
 
@@ -104,8 +105,6 @@ const store = new Vuex.Store({
 
 
     },
-
-
     async signup({ dispatch, commit }, form) {
       // sign user up
       const { user } = await fb.auth.createUserWithEmailAndPassword(form.email, form.password)
@@ -122,7 +121,6 @@ const store = new Vuex.Store({
       await fb.auth.signOut()
       commit('setUserProfile', {})
       router.push('/login')
-
     },
     async logout({ commit }) {
       await fb.auth.signOut()

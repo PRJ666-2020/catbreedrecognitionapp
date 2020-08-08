@@ -12,7 +12,7 @@ import HomePage from "../views/Homepage.vue"
 import BreedList from "../views/BreedList.vue"
 import { auth } from '../firebase'
 import Home from "../views/Home.vue"
-import CatProfile from "../views/catprofile.vue"
+import CatProfile from "../views/CatProfile.vue"
 import Breedlist from "../views/BreedList.vue"
 
 Vue.use(Router)

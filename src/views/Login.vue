@@ -20,11 +20,8 @@
             body-classes="px-lg-5 py-lg-5"
             class="border-0"
           >
-
-
             <template>
               <small class="text-warning" v-show="error.length > 0">{{ error }}</small>
-
               <form role="form" @submit.prevent>
                 <base-input
                   alternative

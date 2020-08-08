@@ -28,7 +28,6 @@ const commentsCollection = db.collection('comments')
 const likesCollection = db.collection('likes')
 const catsCollection = db.collection('cats')
 const breedsCollection = db.collection('breed')
-
 // export utils/refs
 export {
     store,
@@ -41,3 +40,4 @@ export {
     catsCollection,
     breedsCollection
 }
+

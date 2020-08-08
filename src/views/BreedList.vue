@@ -31,7 +31,7 @@
                         <h6 slot="header" class="modal-title" id="modal-title-default">American Shorthair</h6>
                         <p>{{breed[0].description}}</p>
                         <template slot="footer">
-                            <router-link to="/postdetail"><base-button type="primary" >Recognize your own cats!</base-button></router-link>
+                            <router-link to="/recognize"><base-button type="primary" >Recognize your own cats!</base-button></router-link>
                             <base-button type="link" class="ml-auto" @click="modals.modal1 = false">Close
                             </base-button>
                         </template>
@@ -76,7 +76,7 @@
                         <p>{{breed[2].description}}</p>
                       
                         <template slot="footer">
-                          <router-link to="/postdetail"><base-button type="primary" >Recognize your own cats!</base-button></router-link>
+                          <router-link to="/recognize"><base-button type="primary" >Recognize your own cats!</base-button></router-link>
                             <base-button type="link" class="ml-auto" @click="modals.modal3 = false">Close
                             </base-button>
                         </template>
@@ -95,7 +95,7 @@
                         <p>{{breed[3].description}}</p>
 
                         <template slot="footer">
-                          <router-link to="/postdetail"><base-button type="primary" >Recognize your own cats!</base-button></router-link>
+                          <router-link to="/recognize"><base-button type="primary" >Recognize your own cats!</base-button></router-link>
                             <base-button type="link" class="ml-auto" @click="modals.modal4 = false">Close
                             </base-button>
                         </template>
@@ -133,7 +133,7 @@
 
                         <p>{{breed[5].description}}</p>
                         <template slot="footer">
-                         <router-link to="/postdetail"><base-button type="primary" >Recognize your own cats!</base-button></router-link>
+                         <router-link to="/recognize"><base-button type="primary" >Recognize your own cats!</base-button></router-link>
                             <base-button type="link" class="ml-auto" @click="modals.modal5 = false">Close
                             </base-button>
                         </template>
@@ -152,7 +152,7 @@
 
                         <p>{{breed[6].description}}</p>
                         <template slot="footer">
-                          <router-link to="/postdetail"><base-button type="primary" >Recognize your own cats!</base-button></router-link>
+                          <router-link to="/recognize"><base-button type="primary" >Recognize your own cats!</base-button></router-link>
                             <base-button type="link" class="ml-auto" @click="modals.modal6 = false">Close
                             </base-button>
                         </template>
@@ -178,7 +178,7 @@
                         <p>{{breed[7].description}}</p>
 
                         <template slot="footer">
-                          <router-link to="/postdetail"><base-button type="primary" >Recognize your own cats!</base-button></router-link>
+                          <router-link to="/recognize"><base-button type="primary" >Recognize your own cats!</base-button></router-link>
                             <base-button type="link" class="ml-auto" @click="modals.modal7 = false">Close
                             </base-button>
                         </template>
@@ -198,7 +198,7 @@
                         <p>{{breed[4].description}}</p>
 
                         <template slot="footer">
-                          <router-link to="/postdetail"><base-button type="primary" >Recognize your own cats!</base-button></router-link>
+                          <router-link to="/recognize"><base-button type="primary" >Recognize your own cats!</base-button></router-link>
                             <base-button type="link" class="ml-auto" @click="modals.modal8 = false">Close
                             </base-button>
                         </template>
@@ -237,7 +237,7 @@
                         <p>{{breed[8].description}}</p>
 
                         <template slot="footer">
-                         <router-link to="/postdetail"><base-button type="primary" >Recognize your own cats!</base-button></router-link>
+                         <router-link to="/recognize"><base-button type="primary" >Recognize your own cats!</base-button></router-link>
                             <base-button type="link" class="ml-auto" @click="modals.modal9 = false">Close
                             </base-button>
                         </template>
@@ -257,7 +257,7 @@
                         <p>{{breed[9].description}}</p>
 
                         <template slot="footer">
-                          <router-link to="/postdetail"><base-button type="primary" >Recognize your own cats!</base-button></router-link>
+                          <router-link to="/recognize"><base-button type="primary" >Recognize your own cats!</base-button></router-link>
                             <base-button type="link" class="ml-auto" @click="modals.modal10 = false">Close
                             </base-button>
                         </template>

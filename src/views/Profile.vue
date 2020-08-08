@@ -37,7 +37,6 @@
                     class="mr-4"
                     @click="toggleCreateCatModal()"
                   >Create Cat Profile</base-button>
-                  
                   <base-button
                     type="default"
                     size="sm"
@@ -64,12 +63,8 @@
                 </div>
               </div>
             </div>
-            
-            <div class="text-center mt-5">
-              <h3>{{ userProfile.username }}</h3>
-            </div>
             <div class="col-lg-4 order-lg-1">
-              <h4 v-if="cats.length > 0">Your cat(s)</h4>
+              Your cats
               <ul v-for="cat in cats" :key="cat.id" class="list-inline">
                 <li>
                   <a @click="showCat(cat.id)">
@@ -77,6 +72,9 @@
                   </a>
                 </li>
               </ul>
+            </div>
+            <div class="text-center mt-5">
+              <h3>{{ userProfile.username }}</h3>
             </div>
             <div class="mt-5 py-5 border-top text-center">
               <div class="text-center mt-5">
@@ -562,4 +560,5 @@ export default {
 };
 </script>
 <style>
+
 </style>
